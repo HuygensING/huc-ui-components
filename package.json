@@ -1,0 +1,18 @@
+{
+  "name": "huc-ui-components",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build/index.js",
+  "scripts": {
+    "watch": "tsc -w"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^16.0.5",
+    "typescript": "^2.5.2"
+  },
+  "dependencies": {
+    "react": "^15.6.1"
+  }
+}
