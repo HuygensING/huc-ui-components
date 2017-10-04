@@ -1,12 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = require("react");
-var Asides;
-(function (Asides) {
-    Asides[Asides["None"] = 0] = "None";
-    Asides[Asides["Annotations"] = 1] = "Annotations";
-    Asides[Asides["Visualisations"] = 2] = "Visualisations";
-})(Asides = exports.Asides || (exports.Asides = {}));
 const Aside = (props) => React.createElement("aside", { style: {
         bottom: 0,
         boxSizing: 'border-box',
@@ -49,6 +43,12 @@ const Tab = (props) => React.createElement("li", { onClick: props.onClick, style
         marginBottom: '1em',
         padding: '1em',
     } }, props.children);
+var Asides;
+(function (Asides) {
+    Asides[Asides["None"] = 0] = "None";
+    Asides[Asides["Annotations"] = 1] = "Annotations";
+    Asides[Asides["Visualisations"] = 2] = "Visualisations";
+})(Asides = exports.Asides || (exports.Asides = {}));
 class HucOffCanvasAside extends React.Component {
     constructor() {
         super(...arguments);
@@ -66,4 +66,5 @@ class HucOffCanvasAside extends React.Component {
     }
 }
 HucOffCanvasAside.defaultProps = {};
+console.log(HucOffCanvasAside);
 exports.default = HucOffCanvasAside;

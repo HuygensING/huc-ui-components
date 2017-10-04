@@ -1,13 +1,5 @@
 import * as React from 'react';
 
-export interface IProps {
-}
-
-export enum Asides { None, Annotations, Visualisations }
-export interface IState {
-	activeAside: Asides;
-}
-
 const Aside = (props) =>
 	<aside
 		style={{
@@ -82,6 +74,15 @@ const Tab = (props) =>
 		{props.children}
 	</li>
 
+
+export interface IProps {
+}
+
+export enum Asides { None, Annotations, Visualisations }
+export interface IState {
+	activeAside: Asides;
+}
+
 class HucOffCanvasAside extends React.Component<IProps, IState> {
 	static defaultProps = {
 	}
@@ -114,6 +115,6 @@ class HucOffCanvasAside extends React.Component<IProps, IState> {
 	}
 }
 
-
+console.log(HucOffCanvasAside)
 
 export default HucOffCanvasAside;
