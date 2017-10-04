@@ -115,6 +115,4 @@ class HucOffCanvasAside extends React.Component<IProps, IState> {
 	}
 }
 
-console.log(HucOffCanvasAside)
-
 export default HucOffCanvasAside;

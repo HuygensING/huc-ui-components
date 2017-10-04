@@ -66,5 +66,4 @@ class HucOffCanvasAside extends React.Component {
     }
 }
 HucOffCanvasAside.defaultProps = {};
-console.log(HucOffCanvasAside);
 exports.default = HucOffCanvasAside;

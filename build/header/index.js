@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = require("react");
+const default_styles_1 = require("../default-styles");
 const ColorBar = () => React.createElement("div", { style: {
         backgroundColor: '#268f75',
         height: '5px',
@@ -9,18 +10,16 @@ const ColorBar = () => React.createElement("div", { style: {
         right: 0,
         top: 0,
     } });
-const Header = (props) => React.createElement("header", { style: {
+const Header = (props) => React.createElement("header", { style: Object.assign({}, default_styles_1.fontStyle, {
         alignItems: 'center',
         backgroundColor: '#323232',
         color: '#FFF',
         display: 'grid',
-        fontFamily: "'Roboto', sans-serif",
-        fontSize: '18px',
         gridTemplateColumns: '1fr 2fr 1fr',
         height: '60px',
         paddingTop: '5px',
         width: '100%',
-    } }, props.children);
+    }) }, props.children);
 const Menu = (props) => React.createElement("ul", null, props.children);
 const MenuItem = (props) => React.createElement("li", { onClick: (ev) => props.onClickMenuItem(props.children, ev), style: {
         cursor: 'pointer',

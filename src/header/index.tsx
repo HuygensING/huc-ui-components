@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { fontStyle } from '../default-styles';
 
 const ColorBar = () =>
     <div
@@ -15,16 +16,17 @@ const ColorBar = () =>
 const Header = (props) =>
     <header
         style={{
-            alignItems: 'center',
-            backgroundColor: '#323232',
-            color: '#FFF',
-            display: 'grid',
-            fontFamily: "'Roboto', sans-serif",
-            fontSize: '18px',
-            gridTemplateColumns: '1fr 2fr 1fr',
-            height: '60px',
-            paddingTop: '5px',
-            width: '100%',
+            ...fontStyle,
+            ...{
+                alignItems: 'center',
+                backgroundColor: '#323232',
+                color: '#FFF',
+                display: 'grid',
+                gridTemplateColumns: '1fr 2fr 1fr',
+                height: '60px',
+                paddingTop: '5px',
+                width: '100%',
+            }
         }}
     >
         {props.children}
