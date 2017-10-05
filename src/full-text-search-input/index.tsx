@@ -27,6 +27,7 @@ const Input = (props) =>
 	<input
 		aria-labelledby="full-text-search-input-label"
 		id="full-text-search-input-input"
+		onChange={props.onChange}
 		role="searchbox"
 		style={{
 			backgroundColor: '#fff',
@@ -34,10 +35,12 @@ const Input = (props) =>
 			fontSize: '1em',
 			padding: '0.7em',
 		}}
+		value={props.value}
 	/>
 
 const Button = (props) =>
 	<button
+		onClick={props.onClick}
 		style={{
 
 		}}
@@ -45,16 +48,30 @@ const Button = (props) =>
 		S
 	</button>
 
-class FullTextSearchInput extends React.Component<null, null> {
+export interface IState {
+	query: string
+}
+export interface IProps {
+	onButtonClick: (query: string, ev: MouseEvent) => void
+	query?: string
+}
+class FullTextSearchInput extends React.Component<IProps, IState> {
+	public state = {
+		query: this.props.query || '',
+	}
+
 	public render() {
 		return (
 			<Section>
 				<Label>Search in text</Label>
-				<Input />
-				<Button />
+				<Input
+					onChange={(ev) =>  this.setState({ query: ev.target.value })}
+					value={this.state.query}
+				/>
+				<Button onClick={(ev) => this.props.onButtonClick(this.state.query, ev)} />
 			</Section>
 		)
 	}
 }
 
-export default FullTextSearchInput;
+export default FullTextSearchInput

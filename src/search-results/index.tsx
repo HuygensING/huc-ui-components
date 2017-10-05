@@ -50,8 +50,12 @@ const ResultList: React.SFC = (props) =>
 		{props.children}
 	</ul>
 
-const Result: React.SFC = (props) =>
+interface IResult {
+	onClick: (ev: React.MouseEvent<HTMLLIElement>) => void
+}
+const Result: React.SFC<IResult> = (props) =>
 	<li
+		onClick={props.onClick}
 		style={{
 			backgroundColor: '#F6F6F6',
 			marginBottom: '1em',
@@ -62,23 +66,29 @@ const Result: React.SFC = (props) =>
 	</li>
 
 export interface IResultBody {
-	result: number;
+	result: number
 }
 export interface IHucSearchResults {
-	resultBodyComponent: React.SFC<IResultBody>;
-	searchResults: any[];
+	onClickResult: (result: any, ev: React.MouseEvent<HTMLLIElement>) => void
+	resultBodyComponent: React.SFC<IResultBody>
+	searchResults: {
+		hits: any[],
+		total: number,
+	}
 }
 const HucSearchResults: React.SFC<IHucSearchResults> = (props) =>
 	<Section>
 		<Header>
-			<ResultCount resultCount={2} />
+			<ResultCount resultCount={props.searchResults.total} />
 			<OrderBy />
 		</Header>
-		{console.log(props)}
 		<ResultList>
 			{
-				props.searchResults.map((result, i) =>
-					<Result key={i}>
+				props.searchResults.hits.map((result, i) =>
+					<Result
+						key={i}
+						onClick={(ev) => props.onClickResult(result, ev)}
+					>
 						<props.resultBodyComponent {...props} result={result} />
 					</Result>
 				)

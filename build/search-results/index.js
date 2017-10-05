@@ -25,16 +25,15 @@ const ResultList = (props) => React.createElement("ul", { style: {
         margin: 0,
         padding: 0,
     } }, props.children);
-const Result = (props) => React.createElement("li", { style: {
+const Result = (props) => React.createElement("li", { onClick: props.onClick, style: {
         backgroundColor: '#F6F6F6',
         marginBottom: '1em',
         padding: '1em',
     } }, props.children);
 const HucSearchResults = (props) => React.createElement(Section, null,
     React.createElement(Header, null,
-        React.createElement(ResultCount, { resultCount: 2 }),
+        React.createElement(ResultCount, { resultCount: props.searchResults.total }),
         React.createElement(OrderBy, null)),
-    console.log(props),
-    React.createElement(ResultList, null, props.searchResults.map((result, i) => React.createElement(Result, { key: i },
+    React.createElement(ResultList, null, props.searchResults.hits.map((result, i) => React.createElement(Result, { key: i, onClick: (ev) => props.onClickResult(result, ev) },
         React.createElement(props.resultBodyComponent, Object.assign({}, props, { result: result }))))));
 exports.default = HucSearchResults;
