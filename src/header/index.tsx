@@ -33,7 +33,7 @@ const Header = (props) =>
 	</header>;
 
 const Menu = (props) =>
-	<ul role="menu">
+	<ul role="menubar">
 		{props.children}
 	</ul>
 

@@ -6,3 +6,5 @@ const off_canvas_aside_1 = require("./off-canvas-aside");
 exports.HucOffCanvasAside = off_canvas_aside_1.default;
 const full_text_search_input_1 = require("./full-text-search-input");
 exports.HucFullTextSearchInput = full_text_search_input_1.default;
+const search_results_1 = require("./search-results");
+exports.HucSearchResults = search_results_1.default;

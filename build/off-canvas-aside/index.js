@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = require("react");
-const Aside = (props) => React.createElement("aside", { style: {
+const Aside = (props) => React.createElement("aside", { role: "complementary", style: {
         bottom: 0,
         boxSizing: 'border-box',
         display: 'grid',
@@ -16,14 +16,14 @@ const Aside = (props) => React.createElement("aside", { style: {
         whiteSpace: 'normal',
         width: '50%',
     } }, props.children);
-const Body = (props) => React.createElement("div", { style: {
+const Body = (props) => React.createElement("section", { role: "tabpanel", style: {
         backgroundColor: '#EEE',
         boxSizing: 'border-box',
         height: '100%',
         overflow: 'auto',
         padding: '1em',
     } }, props.children);
-const CloseButton = (props) => React.createElement("div", { onClick: props.onClick, style: {
+const CloseButton = (props) => React.createElement("section", { onClick: props.onClick, style: {
         cursor: 'pointer',
         fontSize: '1.5em',
         fontWeight: 'bold',
@@ -31,11 +31,11 @@ const CloseButton = (props) => React.createElement("div", { onClick: props.onCli
         right: '1em',
         top: '0.5em',
     } }, "\u2715");
-const Tabs = (props) => React.createElement("ul", { style: {
+const Tabs = (props) => React.createElement("ul", { role: "tablist", style: {
         alignSelf: 'center',
         justifySelf: 'end',
     } }, props.children);
-const Tab = (props) => React.createElement("li", { onClick: props.onClick, style: {
+const Tab = (props) => React.createElement("li", { onClick: props.onClick, role: "tab", style: {
         backgroundColor: '#eee',
         borderTopLeftRadius: '3px',
         borderBottomLeftRadius: '3px',

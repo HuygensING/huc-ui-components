@@ -2,6 +2,7 @@ import * as React from 'react';
 
 const Aside = (props) =>
 	<aside
+		role="complementary"
 		style={{
 			bottom: 0,
 			boxSizing: 'border-box',
@@ -22,7 +23,8 @@ const Aside = (props) =>
 	</aside>;
 
 const Body = (props) =>
-	<div
+	<section
+		role="tabpanel"
 		style={{
 			backgroundColor: '#EEE',
 			boxSizing: 'border-box',
@@ -32,10 +34,10 @@ const Body = (props) =>
 		}}
 	>
 		{props.children}
-	</div>
+	</section>
 
 const CloseButton = (props) =>
-	<div
+	<section
 		onClick={props.onClick}
 		style={{
 			cursor: 'pointer',
@@ -47,10 +49,11 @@ const CloseButton = (props) =>
 		}}
 	>
 		✕
-	</div>;
+	</section>;
 
 const Tabs = (props) =>
 	<ul
+		role="tablist"
 		style={{
 			alignSelf: 'center',
 			justifySelf: 'end',
@@ -62,6 +65,7 @@ const Tabs = (props) =>
 const Tab = (props) =>
 	<li
 		onClick={props.onClick}
+		role="tab"
 		style={{
 			backgroundColor: '#eee',
 			borderTopLeftRadius: '3px',

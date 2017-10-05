@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { fontStyle } from '../default-styles';
 
-const Wrapper = (props) =>
-	<div
+const Section = (props) =>
+	<section
 		style={{
 			...fontStyle,
 			...{}
 		}}
 	>
 		{props.children}
-	</div>
+	</section>
 
 const Label = (props) =>
 	<label
@@ -27,6 +27,7 @@ const Input = (props) =>
 	<input
 		aria-labelledby="full-text-search-input-label"
 		id="full-text-search-input-input"
+		role="searchbox"
 		style={{
 			backgroundColor: '#fff',
 			border: '1px solid #ddd',
@@ -47,11 +48,11 @@ const Button = (props) =>
 class FullTextSearchInput extends React.Component<null, null> {
 	public render() {
 		return (
-			<Wrapper>
+			<Section>
 				<Label>Search in text</Label>
 				<Input />
 				<Button />
-			</Wrapper>
+			</Section>
 		)
 	}
 }

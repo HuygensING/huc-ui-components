@@ -20,7 +20,7 @@ const Header = (props) => React.createElement("header", { style: Object.assign({
         paddingTop: '5px',
         width: '100%',
     }) }, props.children);
-const Menu = (props) => React.createElement("ul", { role: "menu" }, props.children);
+const Menu = (props) => React.createElement("ul", { role: "menubar" }, props.children);
 const MenuItem = (props) => React.createElement("li", { onClick: (ev) => props.onClickMenuItem(props.children, ev), role: "menuitem", style: {
         cursor: 'pointer',
         display: 'inline-block',
