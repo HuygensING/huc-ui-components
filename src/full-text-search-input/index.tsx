@@ -54,6 +54,7 @@ const Button = (props) =>
 	>
 		Search
 	</button>
+	
 
 export interface IState {
 	query: string
@@ -76,6 +77,20 @@ class FullTextSearchInput extends React.Component<IProps, IState> {
 					value={this.state.query}
 				/>
 				<Button onClick={(ev) => this.props.onButtonClick(this.state.query, ev)} />
+				<div
+					style={{
+						Color: '#ddd',
+						fontSize: '.7em',
+						marginTop: '.5em',
+				}}
+			>
+				<input 
+					type="checkbox" 
+					name="Give suggestions" 
+					value="true"
+				/>
+					Give suggestions
+				</div>
 			</Section>
 		)
 	}
