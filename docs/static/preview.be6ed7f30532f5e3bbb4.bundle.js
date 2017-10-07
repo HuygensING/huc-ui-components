@@ -14231,6 +14231,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fontStyle = {
     fontFamily: "'Roboto', sans-serif",
     fontSize: '18px',
+    fontWeight: 300,
 };
 exports.fontStyle = fontStyle;
 
@@ -40239,19 +40240,25 @@ const Label = (props) => React.createElement("label", { htmlFor: "full-text-sear
         display: 'block',
         fontWeight: 'bold',
     } }, props.children);
-const Input = (props) => React.createElement("input", { "aria-labelledby": "full-text-search-input-label", id: "full-text-search-input-input", role: "searchbox", style: {
+const Input = (props) => React.createElement("input", { "aria-labelledby": "full-text-search-input-label", id: "full-text-search-input-input", onChange: props.onChange, role: "searchbox", style: {
         backgroundColor: '#fff',
         border: '1px solid #ddd',
         fontSize: '1em',
         padding: '0.7em',
-    } });
-const Button = (props) => React.createElement("button", { style: {} }, "S");
+    }, value: props.value });
+const Button = (props) => React.createElement("button", { onClick: props.onClick, style: {} }, "S");
 class FullTextSearchInput extends React.Component {
+    constructor() {
+        super(...arguments);
+        this.state = {
+            query: this.props.query || '',
+        };
+    }
     render() {
         return (React.createElement(Section, null,
             React.createElement(Label, null, "Search in text"),
-            React.createElement(Input, null),
-            React.createElement(Button, null)));
+            React.createElement(Input, { onChange: (ev) => this.setState({ query: ev.target.value }), value: this.state.query }),
+            React.createElement(Button, { onClick: (ev) => this.props.onButtonClick(this.state.query, ev) })));
     }
 }
 exports.default = FullTextSearchInput;
@@ -40440,17 +40447,16 @@ const ResultList = (props) => React.createElement("ul", { style: {
         margin: 0,
         padding: 0,
     } }, props.children);
-const Result = (props) => React.createElement("li", { style: {
+const Result = (props) => React.createElement("li", { onClick: props.onClick, style: {
         backgroundColor: '#F6F6F6',
         marginBottom: '1em',
         padding: '1em',
     } }, props.children);
 const HucSearchResults = (props) => React.createElement(Section, null,
     React.createElement(Header, null,
-        React.createElement(ResultCount, { resultCount: 2 }),
+        React.createElement(ResultCount, { resultCount: props.searchResults.total }),
         React.createElement(OrderBy, null)),
-    console.log(props),
-    React.createElement(ResultList, null, props.searchResults.map((result, i) => React.createElement(Result, { key: i },
+    React.createElement(ResultList, null, props.searchResults.hits.map((result, i) => React.createElement(Result, { key: i, onClick: (ev) => props.onClickResult(result, ev) },
         React.createElement(props.resultBodyComponent, Object.assign({}, props, { result: result }))))));
 exports.default = HucSearchResults;
 
@@ -40503,7 +40509,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 (0, _react3.storiesOf)('HucSearchResults', module).add('default', function () {
 	return _react2.default.createElement(_src.HucSearchResults, {
 		resultBodyComponent: _resultBody2.default,
-		searchResults: [1, 3, 5, 9]
+		searchResults: {
+			hits: [1, 3, 5, 9],
+			total: 4
+		}
 	});
 });
 
@@ -40521,7 +40530,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 		_react2.default.createElement(_src.HucFullTextSearchInput, null),
 		_react2.default.createElement(_src.HucSearchResults, {
 			resultBodyComponent: _resultBody2.default,
-			searchResults: [1, 3, 5, 9]
+			searchResults: {
+				hits: [1, 3, 5, 9],
+				total: 4
+			}
 		})
 	);
 });
@@ -42456,4 +42468,4 @@ module.exports = __webpack_require__(541);
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=preview.9d4c6fd56ea5a235c784.bundle.js.map
+//# sourceMappingURL=preview.be6ed7f30532f5e3bbb4.bundle.js.map

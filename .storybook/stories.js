@@ -23,7 +23,10 @@ storiesOf('HucSearchResults', module)
 	.add('default', () =>
 		<HucSearchResults
 			resultBodyComponent={ResultBody}
-			searchResults={[1, 3, 5, 9]}
+			searchResults={{
+				hits: [1, 3, 5, 9],
+				total: 4,
+			}}
 		/>
 	)
 
@@ -40,7 +43,10 @@ storiesOf('Search', module)
 			<HucFullTextSearchInput />
 			<HucSearchResults
 				resultBodyComponent={ResultBody}
-				searchResults={[1, 3, 5, 9]}
+				searchResults={{
+					hits: [1, 3, 5, 9],
+					total: 4,
+				}}
 			/>
 		</section>			
 	)
