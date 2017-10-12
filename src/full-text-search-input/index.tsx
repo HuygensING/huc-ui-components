@@ -18,6 +18,7 @@ const Label = (props) =>
 		style={{
 			display: 'block',
 			fontWeight: 'bold',
+			marginBottom: '.5em',
 		}}
 	>
 		{props.children}
@@ -31,9 +32,10 @@ const Input = (props) =>
 		role="searchbox"
 		style={{
 			backgroundColor: '#fff',
-			border: '1px solid #ddd',
-			fontSize: '1em',
-			padding: '0.7em',
+			border: '1px solid #eee',
+			fontSize: '.7em',
+			padding: '0.5em',
+			width: 'calc(100% - 100px)',
 		}}
 		value={props.value}
 	/>
@@ -42,6 +44,10 @@ const Button = (props) =>
 	<button
 		onClick={props.onClick}
 		style={{
+			backgroundColor: '#eee',
+			fontSize: '.7em',
+			padding: '0.6em',
+			border:'none',
 
 		}}
 	>
@@ -113,7 +119,7 @@ class FullTextSearchInput extends React.Component<IProps, IState> {
 					value={this.state.query}
 				/>
 				<Button onClick={(ev) => this.props.onButtonClick(this.state.query, ev)}>
-					s
+					Search
 				</Button>
 				<Section>
 					<Button
