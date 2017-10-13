@@ -14,14 +14,21 @@ const Section = (props) => React.createElement("section", { style: Object.assign
 const Label = (props) => React.createElement("label", { htmlFor: "full-text-search-input-input", id: "full-text-search-input-label", style: {
         display: 'block',
         fontWeight: 'bold',
+        marginBottom: '.5em',
     } }, props.children);
 const Input = (props) => React.createElement("input", { "aria-labelledby": "full-text-search-input-label", id: "full-text-search-input-input", onChange: props.onChange, role: "searchbox", style: {
         backgroundColor: '#fff',
-        border: '1px solid #ddd',
-        fontSize: '1em',
-        padding: '0.7em',
+        border: '1px solid #eee',
+        fontSize: '.7em',
+        padding: '0.5em',
+        width: 'calc(100% - 100px)',
     }, value: props.value });
-const Button = (props) => React.createElement("button", { onClick: props.onClick, style: {} }, props.children);
+const Button = (props) => React.createElement("button", { onClick: props.onClick, style: {
+        backgroundColor: '#eee',
+        fontSize: '.7em',
+        padding: '0.6em',
+        border: 'none',
+    } }, props.children);
 const SemanticSuggestions = (props) => React.createElement("ul", null, props.children);
 class Suggestion extends React.Component {
     constructor() {
@@ -32,11 +39,10 @@ class Suggestion extends React.Component {
     }
     render() {
         return (React.createElement("li", { onClick: this.props.onClick, onMouseEnter: () => this.setState({ hover: true }), onMouseLeave: () => this.setState({ hover: false }), style: {
-                background: this.state.hover ? '#245b6d' : 'lightblue',
+                background: this.state.hover ? '#245b6d' : `linear-gradient(to right, lightblue 0%, lightblue ${100 * this.props.suggestion.weight}%, white ${20 + (100 * this.props.suggestion.weight)}%, white 100%)`,
                 borderRadius: '3px',
                 color: this.state.hover ? 'white' : 'inherit',
                 cursor: 'pointer',
-                display: 'inline-block',
                 marginBottom: '0.3em',
                 marginRight: '0.2em',
                 padding: '0.1em 0.3em',
@@ -58,7 +64,7 @@ class FullTextSearchInput extends React.Component {
                     query: ev.target.value,
                     suggestions: []
                 }), value: this.state.query }),
-            React.createElement(Button, { onClick: (ev) => this.props.onButtonClick(this.state.query, ev) }, "s"),
+            React.createElement(Button, { onClick: (ev) => this.props.onButtonClick(this.state.query, ev) }, "Search"),
             React.createElement(Section, null,
                 React.createElement(Button, { onClick: (ev) => __awaiter(this, void 0, void 0, function* () {
                         const xhr = yield fetch(`/api/search`, {
@@ -69,15 +75,15 @@ class FullTextSearchInput extends React.Component {
                             method: 'POST',
                         });
                         const data = yield xhr.json();
-                        this.setState({ suggestions: data.suggestions.map(s => s.slice(0, s.indexOf(' '))) });
+                        this.setState({ suggestions: data.suggestions });
                     }) }, "Semantic suggestion"),
-                React.createElement(SemanticSuggestions, null, this.state.suggestions.map((s => React.createElement(Suggestion, { key: s, onClick: (ev) => {
+                React.createElement(SemanticSuggestions, null, this.state.suggestions.map(((s) => React.createElement(Suggestion, { key: s.text, onClick: (ev) => {
                         this.setState({
-                            query: s,
+                            query: s.text,
                             suggestions: [],
                         });
-                        this.props.onButtonClick(s, ev);
-                    } }, s)))))));
+                        this.props.onButtonClick(s.text, ev);
+                    }, suggestion: s }, s.text)))))));
     }
 }
 exports.default = FullTextSearchInput;

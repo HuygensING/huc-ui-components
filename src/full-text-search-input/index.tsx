@@ -62,10 +62,13 @@ const SemanticSuggestions: React.SFC = (props) =>
 interface IOnClick {
 	onClick: (any) => void
 }
+interface ISuggestionProps extends IOnClick {
+	suggestion: ISuggestion
+}
 interface ISuggestionState {
 	hover: boolean
 }
-class Suggestion extends React.Component<IOnClick, ISuggestionState> {
+class Suggestion extends React.Component<ISuggestionProps, ISuggestionState> {
 	public state = {
 		hover: false,
 	}
@@ -77,11 +80,10 @@ class Suggestion extends React.Component<IOnClick, ISuggestionState> {
 				onMouseEnter={() => this.setState({ hover: true })}
 				onMouseLeave={() => this.setState({ hover: false })}
 				style={{
-					background: this.state.hover ? '#245b6d' : 'lightblue',
+					background: this.state.hover ? '#245b6d' : `linear-gradient(to right, lightblue 0%, lightblue ${100 * this.props.suggestion.weight}%, white ${20 + (100 * this.props.suggestion.weight)}%, white 100%)`,
 					borderRadius: '3px',
 					color: this.state.hover ? 'white' : 'inherit',
 					cursor: 'pointer',
-					display: 'inline-block',
 					marginBottom: '0.3em',
 					marginRight: '0.2em',
 					padding: '0.1em 0.3em',
@@ -93,9 +95,13 @@ class Suggestion extends React.Component<IOnClick, ISuggestionState> {
 	}
 }
 
+export interface ISuggestion {
+	text: string
+	weight: number
+}
 export interface IState {
 	query: string
-	suggestions: string[]
+	suggestions: ISuggestion[]
 }
 export interface IProps {
 	onButtonClick: (query: string, ev: MouseEvent) => void
@@ -132,25 +138,26 @@ class FullTextSearchInput extends React.Component<IProps, IState> {
 								method: 'POST',
 							})
 							const data = await xhr.json()
-							this.setState({ suggestions: data.suggestions.map(s => s.slice(0, s.indexOf(' '))) })
+							this.setState({ suggestions: data.suggestions })
 						}}
 					>
 						Semantic suggestion
 					</Button>
 					<SemanticSuggestions>
 						{
-							this.state.suggestions.map((s =>
+							this.state.suggestions.map(((s: ISuggestion) =>
 								<Suggestion
-									key={s}
+									key={s.text}
 									onClick={(ev) => {
 										this.setState({
-											query: s,
+											query: s.text,
 											suggestions: [],
 										})
-										this.props.onButtonClick(s, ev)
+										this.props.onButtonClick(s.text, ev)
 									}}
+									suggestion={s}
 								>
-									{s}
+									{s.text}
 								</Suggestion>
 							))
 						}

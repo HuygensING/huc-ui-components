@@ -1,8 +1,12 @@
 /// <reference types="react" />
 import * as React from 'react';
+export interface ISuggestion {
+    text: string;
+    weight: number;
+}
 export interface IState {
     query: string;
-    suggestions: string[];
+    suggestions: ISuggestion[];
 }
 export interface IProps {
     onButtonClick: (query: string, ev: MouseEvent) => void;
