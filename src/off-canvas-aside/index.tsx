@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const Aside = (props) =>
+const AsideComp = (props) =>
 	<aside
 		role="complementary"
 		style={{
@@ -9,7 +9,7 @@ const Aside = (props) =>
 			display: 'grid',
 			gridTemplateColumns: '40px auto',
 			gridTemplateRows: '100%',
-			left: props.activeAside === Asides.None ? 'calc(100% - 40px)' : '50%',
+			left: props.activeAside === Aside.None ? 'calc(100% - 40px)' : '50%',
 			overflow: 'hidden',
 			position: 'absolute',
 			right: 0,
@@ -22,7 +22,7 @@ const Aside = (props) =>
 		{props.children}
 	</aside>;
 
-const Body = (props) =>
+const PanelContainer = (props) =>
 	<section
 		role="tabpanel"
 		style={{
@@ -37,19 +37,18 @@ const Body = (props) =>
 	</section>
 
 const CloseButton = (props) =>
-	<section
+	<div
 		onClick={props.onClick}
 		style={{
 			cursor: 'pointer',
 			fontSize: '1.5em',
 			fontWeight: 'bold',
-			position: 'absolute',
-			right: '1em',
-			top: '0.5em',
+			marginBottom: '1em',
+			textAlign: 'right',
 		}}
 	>
 		✕
-	</section>;
+	</div>;
 
 const Tabs = (props) =>
 	<ul
@@ -82,9 +81,9 @@ const Tab = (props) =>
 export interface IProps {
 }
 
-export enum Asides { None, Annotations, Visualisations }
+export enum Aside { None, Annotations, Visualisations }
 export interface IState {
-	activeAside: Asides;
+	activeAside: Aside;
 }
 
 class HucOffCanvasAside extends React.Component<IProps, IState> {
@@ -92,30 +91,44 @@ class HucOffCanvasAside extends React.Component<IProps, IState> {
 	}
 
 	public state = {
-		activeAside: Asides.Annotations,
+		activeAside: Aside.Visualisations,
 	}
 	
 	public render() {
 		return (
-			<Aside activeAside={this.state.activeAside}>
+			<AsideComp activeAside={this.state.activeAside}>
 				<Tabs>
-					<Tab
-						onClick={() => this.setState({ activeAside: Asides.Annotations })}
-					>
-						A	
-					</Tab>
-					<Tab
-						onClick={() => this.setState({ activeAside: Asides.Visualisations })}
-					>
-						V
-					</Tab>
+					{
+						React.Children.map(this.props.children, (c: JSX.Element) => this.tabs(c.props.type))
+					}
 				</Tabs>
-				<Body>{this.props.children}</Body>
-				<CloseButton
-					onClick={() => this.setState({ activeAside: Asides.None })}
-				/>
-			</Aside>
+				<PanelContainer>
+					<CloseButton
+						onClick={() => this.setState({ activeAside: Aside.None })}
+					/>
+					{
+						React.Children.toArray(this.props.children).find((c: JSX.Element) => c.props.type == this.state.activeAside)
+					}
+				</PanelContainer>
+			</AsideComp>
 		);
+	}
+
+	private tabs(name) {
+		return {
+			[Aside.Annotations]: 
+				<Tab
+					onClick={() => this.setState({ activeAside: Aside.Annotations })}
+				>
+					A	
+				</Tab>,
+			[Aside.Visualisations]:
+				<Tab
+					onClick={() => this.setState({ activeAside: Aside.Visualisations })}
+				>
+					V
+				</Tab>
+		}[name]
 	}
 }
 

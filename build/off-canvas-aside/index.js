@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = require("react");
-const Aside = (props) => React.createElement("aside", { role: "complementary", style: {
+const AsideComp = (props) => React.createElement("aside", { role: "complementary", style: {
         bottom: 0,
         boxSizing: 'border-box',
         display: 'grid',
         gridTemplateColumns: '40px auto',
         gridTemplateRows: '100%',
-        left: props.activeAside === Asides.None ? 'calc(100% - 40px)' : '50%',
+        left: props.activeAside === Aside.None ? 'calc(100% - 40px)' : '50%',
         overflow: 'hidden',
         position: 'absolute',
         right: 0,
@@ -16,20 +16,19 @@ const Aside = (props) => React.createElement("aside", { role: "complementary", s
         whiteSpace: 'normal',
         width: '50%',
     } }, props.children);
-const Body = (props) => React.createElement("section", { role: "tabpanel", style: {
+const PanelContainer = (props) => React.createElement("section", { role: "tabpanel", style: {
         backgroundColor: '#EEE',
         boxSizing: 'border-box',
         height: '100%',
         overflow: 'auto',
         padding: '1em',
     } }, props.children);
-const CloseButton = (props) => React.createElement("section", { onClick: props.onClick, style: {
+const CloseButton = (props) => React.createElement("div", { onClick: props.onClick, style: {
         cursor: 'pointer',
         fontSize: '1.5em',
         fontWeight: 'bold',
-        position: 'absolute',
-        right: '1em',
-        top: '0.5em',
+        marginBottom: '1em',
+        textAlign: 'right',
     } }, "\u2715");
 const Tabs = (props) => React.createElement("ul", { role: "tablist", style: {
         alignSelf: 'center',
@@ -43,26 +42,31 @@ const Tab = (props) => React.createElement("li", { onClick: props.onClick, role:
         marginBottom: '1em',
         padding: '1em',
     } }, props.children);
-var Asides;
-(function (Asides) {
-    Asides[Asides["None"] = 0] = "None";
-    Asides[Asides["Annotations"] = 1] = "Annotations";
-    Asides[Asides["Visualisations"] = 2] = "Visualisations";
-})(Asides = exports.Asides || (exports.Asides = {}));
+var Aside;
+(function (Aside) {
+    Aside[Aside["None"] = 0] = "None";
+    Aside[Aside["Annotations"] = 1] = "Annotations";
+    Aside[Aside["Visualisations"] = 2] = "Visualisations";
+})(Aside = exports.Aside || (exports.Aside = {}));
 class HucOffCanvasAside extends React.Component {
     constructor() {
         super(...arguments);
         this.state = {
-            activeAside: Asides.Annotations,
+            activeAside: Aside.Visualisations,
         };
     }
     render() {
-        return (React.createElement(Aside, { activeAside: this.state.activeAside },
-            React.createElement(Tabs, null,
-                React.createElement(Tab, { onClick: () => this.setState({ activeAside: Asides.Annotations }) }, "A"),
-                React.createElement(Tab, { onClick: () => this.setState({ activeAside: Asides.Visualisations }) }, "V")),
-            React.createElement(Body, null, this.props.children),
-            React.createElement(CloseButton, { onClick: () => this.setState({ activeAside: Asides.None }) })));
+        return (React.createElement(AsideComp, { activeAside: this.state.activeAside },
+            React.createElement(Tabs, null, React.Children.map(this.props.children, (c) => this.tabs(c.props.type))),
+            React.createElement(PanelContainer, null,
+                React.createElement(CloseButton, { onClick: () => this.setState({ activeAside: Aside.None }) }),
+                React.Children.toArray(this.props.children).find((c) => c.props.type == this.state.activeAside))));
+    }
+    tabs(name) {
+        return {
+            [Aside.Annotations]: React.createElement(Tab, { onClick: () => this.setState({ activeAside: Aside.Annotations }) }, "A"),
+            [Aside.Visualisations]: React.createElement(Tab, { onClick: () => this.setState({ activeAside: Aside.Visualisations }) }, "V")
+        }[name];
     }
 }
 HucOffCanvasAside.defaultProps = {};
