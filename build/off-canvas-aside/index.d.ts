@@ -1,6 +1,8 @@
 /// <reference types="react" />
 import * as React from 'react';
 export interface IProps {
+    fullScreen: boolean;
+    open: boolean;
 }
 export declare enum Aside {
     None = 0,
@@ -9,13 +11,20 @@ export declare enum Aside {
 }
 export interface IState {
     activeAside: Aside;
+    fullScreen: boolean;
 }
 declare class HucOffCanvasAside extends React.Component<IProps, IState> {
-    static defaultProps: {};
-    state: {
-        activeAside: Aside;
+    static defaultProps: {
+        fullScreen: boolean;
+        open: boolean;
     };
+    state: {
+        activeAside: any;
+        fullScreen: boolean;
+    };
+    componentWillReceiveProps(nextProps: any): void;
     render(): JSX.Element;
+    private handleClose;
     private tabs(name);
 }
 export default HucOffCanvasAside;

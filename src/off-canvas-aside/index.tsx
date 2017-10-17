@@ -9,14 +9,18 @@ const AsideComp = (props) =>
 			display: 'grid',
 			gridTemplateColumns: '40px auto',
 			gridTemplateRows: '100%',
-			left: props.activeAside === Aside.None ? 'calc(100% - 40px)' : '50%',
+			left: props.activeAside === Aside.None ?
+				'calc(100% - 40px)' :
+				props.fullScreen ?
+					'-40px' :
+					'50%',
 			overflow: 'hidden',
 			position: 'absolute',
 			right: 0,
 			top: '65px',
 			transition: 'left 300ms ease-in-out',
 			whiteSpace: 'normal',
-			width: '50%',
+			width: props.fullScreen ? 'calc(100% + 40px)' : '50%',
 		}}
 	>
 		{props.children}
@@ -79,24 +83,39 @@ const Tab = (props) =>
 
 
 export interface IProps {
+	fullScreen: boolean
+	open: boolean
 }
 
 export enum Aside { None, Annotations, Visualisations }
 export interface IState {
-	activeAside: Aside;
+	activeAside: Aside
+	fullScreen: boolean
 }
 
 class HucOffCanvasAside extends React.Component<IProps, IState> {
 	static defaultProps = {
+		fullScreen: false,
+		open: false,
 	}
 
 	public state = {
-		activeAside: Aside.Visualisations,
+		activeAside: this.props.open ? (React.Children.toArray(this.props.children)[0] as JSX.Element).props.type : Aside.None,
+		fullScreen: this.props.fullScreen,
+	}
+
+	public componentWillReceiveProps(nextProps) {
+		this.setState({
+			fullScreen: nextProps.fullScreen,
+		})
 	}
 	
 	public render() {
 		return (
-			<AsideComp activeAside={this.state.activeAside}>
+			<AsideComp
+				activeAside={this.state.activeAside}
+				fullScreen={this.state.fullScreen}
+			>
 				<Tabs>
 					{
 						React.Children.map(this.props.children, (c: JSX.Element) => this.tabs(c.props.type))
@@ -104,7 +123,7 @@ class HucOffCanvasAside extends React.Component<IProps, IState> {
 				</Tabs>
 				<PanelContainer>
 					<CloseButton
-						onClick={() => this.setState({ activeAside: Aside.None })}
+						onClick={this.handleClose}
 					/>
 					{
 						React.Children.toArray(this.props.children).find((c: JSX.Element) => c.props.type == this.state.activeAside)
@@ -112,6 +131,20 @@ class HucOffCanvasAside extends React.Component<IProps, IState> {
 				</PanelContainer>
 			</AsideComp>
 		);
+	}
+
+	private handleClose = () => {
+		const nextState = {
+			activeAside: Aside.None,
+		}
+
+		const done = () =>
+			setTimeout(
+				() => this.setState({ fullScreen: false }),
+				300
+			)
+
+		this.setState(nextState, done)
 	}
 
 	private tabs(name) {

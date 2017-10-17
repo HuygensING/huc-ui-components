@@ -7,14 +7,18 @@ const AsideComp = (props) => React.createElement("aside", { role: "complementary
         display: 'grid',
         gridTemplateColumns: '40px auto',
         gridTemplateRows: '100%',
-        left: props.activeAside === Aside.None ? 'calc(100% - 40px)' : '50%',
+        left: props.activeAside === Aside.None ?
+            'calc(100% - 40px)' :
+            props.fullScreen ?
+                '-40px' :
+                '50%',
         overflow: 'hidden',
         position: 'absolute',
         right: 0,
         top: '65px',
         transition: 'left 300ms ease-in-out',
         whiteSpace: 'normal',
-        width: '50%',
+        width: props.fullScreen ? 'calc(100% + 40px)' : '50%',
     } }, props.children);
 const PanelContainer = (props) => React.createElement("section", { role: "tabpanel", style: {
         backgroundColor: '#EEE',
@@ -52,14 +56,27 @@ class HucOffCanvasAside extends React.Component {
     constructor() {
         super(...arguments);
         this.state = {
-            activeAside: Aside.Visualisations,
+            activeAside: this.props.open ? React.Children.toArray(this.props.children)[0].props.type : Aside.None,
+            fullScreen: this.props.fullScreen,
+        };
+        this.handleClose = () => {
+            const nextState = {
+                activeAside: Aside.None,
+            };
+            const done = () => setTimeout(() => this.setState({ fullScreen: false }), 300);
+            this.setState(nextState, done);
         };
     }
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            fullScreen: nextProps.fullScreen,
+        });
+    }
     render() {
-        return (React.createElement(AsideComp, { activeAside: this.state.activeAside },
+        return (React.createElement(AsideComp, { activeAside: this.state.activeAside, fullScreen: this.state.fullScreen },
             React.createElement(Tabs, null, React.Children.map(this.props.children, (c) => this.tabs(c.props.type))),
             React.createElement(PanelContainer, null,
-                React.createElement(CloseButton, { onClick: () => this.setState({ activeAside: Aside.None }) }),
+                React.createElement(CloseButton, { onClick: this.handleClose }),
                 React.Children.toArray(this.props.children).find((c) => c.props.type == this.state.activeAside))));
     }
     tabs(name) {
@@ -69,5 +86,8 @@ class HucOffCanvasAside extends React.Component {
         }[name];
     }
 }
-HucOffCanvasAside.defaultProps = {};
+HucOffCanvasAside.defaultProps = {
+    fullScreen: false,
+    open: false,
+};
 exports.default = HucOffCanvasAside;
