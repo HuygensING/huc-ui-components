@@ -29,6 +29,7 @@ const Input = (props) =>
 		aria-labelledby="full-text-search-input-label"
 		id="full-text-search-input-input"
 		onChange={props.onChange}
+		onKeyDown={props.onKeyDown}
 		role="searchbox"
 		style={{
 			backgroundColor: '#fff',
@@ -54,63 +55,30 @@ const Button = (props) =>
 		{props.children}
 	</button>
 
-const SemanticSuggestions: React.SFC = (props) =>
-	<ul>
-		{props.children}
-	</ul>
-
 interface IOnClick {
 	onClick: (any) => void
 }
-interface ISuggestionProps extends IOnClick {
-	suggestion: ISuggestion
-}
-interface ISuggestionState {
-	hover: boolean
-}
-class Suggestion extends React.Component<ISuggestionProps, ISuggestionState> {
-	public state = {
-		hover: false,
-	}
 
-	public render() {
-		return (
-			<li
-				onClick={this.props.onClick}
-				onMouseEnter={() => this.setState({ hover: true })}
-				onMouseLeave={() => this.setState({ hover: false })}
-				style={{
-					background: this.state.hover ? '#245b6d' : `linear-gradient(to right, lightblue 0%, lightblue ${100 * this.props.suggestion.weight}%, white ${20 + (100 * this.props.suggestion.weight)}%, white 100%)`,
-					borderRadius: '3px',
-					color: this.state.hover ? 'white' : 'inherit',
-					cursor: 'pointer',
-					marginBottom: '0.3em',
-					marginRight: '0.2em',
-					padding: '0.1em 0.3em',
-				}}
-			>
-				{this.props.children}
-			</li>
-		)
-	}
-}
-
-export interface ISuggestion {
-	text: string
-	weight: number
-}
 export interface IState {
 	query: string
-	suggestions: ISuggestion[]
 }
 export interface IProps {
 	onButtonClick: (query: string, ev: MouseEvent) => void
+	onChange: (ev: any) => void
+	onKeyDown: (ev: any) => void
 	query?: string
 }
 class FullTextSearchInput extends React.Component<IProps, IState> {
 	public state = {
 		query: this.props.query || '',
-		suggestions: [],
+	}
+
+	public componentWillReceiveProps(nextProps) {
+		if (this.props.query !== nextProps.query) {
+			this.setState({
+				query: nextProps.query
+			})
+		}
 	}
 
 	public render() {
@@ -118,51 +86,18 @@ class FullTextSearchInput extends React.Component<IProps, IState> {
 			<Section>
 				<Label>Search in text</Label>
 				<Input
-					onChange={(ev) =>  this.setState({
-						query: ev.target.value,
-						suggestions: []
-					})}
+					onChange={(ev) => {
+						this.setState({
+							query: ev.target.value,
+						})
+						this.props.onChange(ev)
+					}}
+					onKeyDown={this.props.onKeyDown}
 					value={this.state.query}
 				/>
 				<Button onClick={(ev) => this.props.onButtonClick(this.state.query, ev)}>
 					Search
 				</Button>
-				<Section>
-					<Button
-						onClick={async (ev) => {
-							const xhr = await fetch(`/api/search`, {
-								body: JSON.stringify({ query: this.state.query }),
-								headers: {
-									'Content-Type': 'application/json'
-								},
-								method: 'POST',
-							})
-							const data = await xhr.json()
-							this.setState({ suggestions: data.suggestions })
-						}}
-					>
-						Semantic suggestion
-					</Button>
-					<SemanticSuggestions>
-						{
-							this.state.suggestions.map(((s: ISuggestion) =>
-								<Suggestion
-									key={s.text}
-									onClick={(ev) => {
-										this.setState({
-											query: s.text,
-											suggestions: [],
-										})
-										this.props.onButtonClick(s.text, ev)
-									}}
-									suggestion={s}
-								>
-									{s.text}
-								</Suggestion>
-							))
-						}
-					</SemanticSuggestions>
-				</Section>
 			</Section>
 		)
 	}
