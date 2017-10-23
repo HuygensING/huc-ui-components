@@ -1,11 +1,14 @@
 import * as React from 'react';
 import { fontStyle } from '../default-styles';
+import AutoSuggest from './auto-suggest'
 
 const Section = (props) =>
 	<section
 		style={{
 			...fontStyle,
-			...{}
+			...{
+				position: 'relative',
+			}
 		}}
 	>
 		{props.children}
@@ -34,6 +37,7 @@ const Input = (props) =>
 		style={{
 			backgroundColor: '#fff',
 			border: '1px solid #eee',
+			boxSizing: 'border-box',
 			fontSize: '.7em',
 			padding: '0.5em',
 			width: 'calc(100% - 100px)',
@@ -46,10 +50,11 @@ const Button = (props) =>
 		onClick={props.onClick}
 		style={{
 			backgroundColor: '#eee',
+			border:'none',
+			boxSizing: 'border-box',
 			fontSize: '.7em',
 			padding: '0.6em',
-			border:'none',
-
+			width: '100px',
 		}}
 	>
 		{props.children}
@@ -60,17 +65,28 @@ interface IOnClick {
 }
 
 export interface IState {
+	activeSuggestion: string | null
 	query: string
+	suggestions: string[]
 }
 export interface IProps {
-	onButtonClick: (query: string, ev: MouseEvent) => void
-	onChange: (ev: any) => void
+	autoSuggest: (query: string) => string[]
+	minimalQueryLength: number
+	onChange: (q: string) => void
 	onKeyDown: (ev: any) => void
-	query?: string
+	query: string
+	search: (query: string, ev?: MouseEvent) => void
 }
 class FullTextSearchInput extends React.Component<IProps, IState> {
+	static defaultProps = {
+		minimalQueryLength: 2,
+		query: '',
+	}
+
 	public state = {
+		activeSuggestion: null,
 		query: this.props.query || '',
+		suggestions: []
 	}
 
 	public componentWillReceiveProps(nextProps) {
@@ -86,20 +102,82 @@ class FullTextSearchInput extends React.Component<IProps, IState> {
 			<Section>
 				<Label>Search in text</Label>
 				<Input
-					onChange={(ev) => {
+					onChange={async (ev) => {
+						const query = ev.target.value
+						const suggestions = this.props.autoSuggest && query.length >= this.props.minimalQueryLength ?
+							await this.props.autoSuggest(query) :
+							[]
+
 						this.setState({
-							query: ev.target.value,
+							query,
+							suggestions,
 						})
-						this.props.onChange(ev)
+						this.props.onChange(query)
 					}}
-					onKeyDown={this.props.onKeyDown}
+					onKeyDown={(ev) => {
+						if (ev.keyCode === 38 || ev.keyCode === 40) {
+							this.setActiveSuggestion(ev.keyCode)
+						} else if (ev.keyCode === 13) {
+							const activeSuggestion = this.state.activeSuggestion
+							if (typeof activeSuggestion === 'string') {
+								this.activateSuggestion(activeSuggestion)
+							} else {
+								this.props.onChange(this.state.query)
+								this.props.search(this.state.query, ev)
+							}
+						} else if (this.props.onKeyDown != null) {
+							this.props.onKeyDown(ev)
+						}
+					}}
 					value={this.state.query}
 				/>
-				<Button onClick={(ev) => this.props.onButtonClick(this.state.query, ev)}>
+				<Button onClick={(ev) => this.props.search(this.state.query, ev)}>
 					Search
 				</Button>
+				{
+					this.props.autoSuggest != null &&
+					<AutoSuggest
+						activateSuggestion={this.activateSuggestion}
+						activeSuggestion={this.state.activeSuggestion}
+						suggestions={this.state.suggestions}
+					/>
+				}
 			</Section>
 		)
+	}
+
+	private activateSuggestion = (suggestion: string) => {
+		this.setState({
+			query: suggestion,
+			suggestions: [],
+		})
+
+		this.props.onChange(suggestion)
+		this.props.search(suggestion)
+
+	}
+
+	private setActiveSuggestion = (keyCode: number) => {
+		let activeSuggestion: string | null = this.state.activeSuggestion;
+
+		if (typeof activeSuggestion === 'string') {
+			const index = this.state.suggestions.indexOf(activeSuggestion)
+			if (keyCode === 40) {
+				 activeSuggestion = (index < (this.state.suggestions.length - 1)) ?
+					 this.state.suggestions[index + 1] :
+					 this.state.suggestions[0]
+			}
+			if (keyCode === 38) {
+				 activeSuggestion = (index > 0) ?
+				 	this.state.suggestions[index - 1] :
+					this.state.suggestions[this.state.suggestions.length - 1]
+			}
+		} else {
+			if (keyCode === 40) activeSuggestion = this.state.suggestions[0]
+			if (keyCode === 38) activeSuggestion = this.state.suggestions[this.state.suggestions.length - 1]
+		}
+
+		this.setState({ activeSuggestion })
 	}
 }
 

@@ -18,6 +18,17 @@ storiesOf('HucOffCanvasAside', module)
 
 storiesOf('HucFullTextSearchInput', module)
 	.add('default', () => <HucFullTextSearchInput />)
+	.add('suggestions', () =>
+		<HucFullTextSearchInput
+			autoSuggest={(query) =>
+				[ 'ping-pong', 'tafeltennis', 'basketbal', 'basketball', 'goud', 'gold', 'voetbal', 'foetbal', 'footbal', 'football' ]
+					.filter(x => x.indexOf(query) > -1)
+					.sort()
+			}
+			onChange={(query) => console.log(query)}
+			search={(query) => console.log(query)}
+		/>
+	)
 
 storiesOf('HucSearchResults', module)
 	.add('default', () =>
