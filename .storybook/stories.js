@@ -20,10 +20,15 @@ storiesOf('HucFullTextSearchInput', module)
 	.add('default', () => <HucFullTextSearchInput />)
 	.add('suggestions', () =>
 		<HucFullTextSearchInput
-			autoSuggest={(query) =>
-				[ 'ping-pong', 'tafeltennis', 'basketbal', 'basketball', 'goud', 'gold', 'voetbal', 'foetbal', 'footbal', 'football' ]
-					.filter(x => x.indexOf(query) > -1)
-					.sort()
+			autoSuggest={(query) => new Promise((resolve, reject) => {
+				setTimeout(() => {
+					resolve(
+						[ 'ping-pong', 'tafeltennis', 'basketbal', 'basketball', 'goud', 'gold', 'voetbal', 'foetbal', 'footbal', 'football' ]
+							.filter(x => x.indexOf(query) > -1)
+							.sort()
+					)
+				}, 1000)
+			})
 			}
 			onChange={(query) => console.log(query)}
 			search={(query) => console.log(query)}

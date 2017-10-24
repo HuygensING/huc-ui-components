@@ -87,14 +87,12 @@ class FullTextSearchInput extends React.Component {
             React.createElement(Label, null, "Search in text"),
             React.createElement(Input, { onChange: (ev) => __awaiter(this, void 0, void 0, function* () {
                     const query = ev.target.value;
+                    this.setState({ query });
+                    this.props.onChange(query);
                     const suggestions = this.props.autoSuggest && query.length >= this.props.minimalQueryLength ?
                         yield this.props.autoSuggest(query) :
                         [];
-                    this.setState({
-                        query,
-                        suggestions,
-                    });
-                    this.props.onChange(query);
+                    this.setState({ suggestions });
                 }), onKeyDown: (ev) => {
                     if (ev.keyCode === 38 || ev.keyCode === 40) {
                         this.setActiveSuggestion(ev.keyCode);

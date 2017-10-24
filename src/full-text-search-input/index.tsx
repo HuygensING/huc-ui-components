@@ -104,15 +104,13 @@ class FullTextSearchInput extends React.Component<IProps, IState> {
 				<Input
 					onChange={async (ev) => {
 						const query = ev.target.value
+						this.setState({ query })
+						this.props.onChange(query)
+
 						const suggestions = this.props.autoSuggest && query.length >= this.props.minimalQueryLength ?
 							await this.props.autoSuggest(query) :
 							[]
-
-						this.setState({
-							query,
-							suggestions,
-						})
-						this.props.onChange(query)
+						this.setState({ suggestions })
 					}}
 					onKeyDown={(ev) => {
 						if (ev.keyCode === 38 || ev.keyCode === 40) {
