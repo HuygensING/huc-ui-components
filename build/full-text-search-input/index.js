@@ -11,9 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const React = require("react");
 const default_styles_1 = require("../default-styles");
 const auto_suggest_1 = require("./auto-suggest");
-const Section = (props) => React.createElement("section", { style: Object.assign({}, default_styles_1.fontStyle, {
-        position: 'relative',
-    }) }, props.children);
+const Section = (props) => React.createElement("section", { style: Object.assign({}, default_styles_1.fontStyle, { position: 'relative' }) }, props.children);
 const Label = (props) => React.createElement("label", { htmlFor: "full-text-search-input-input", id: "full-text-search-input-label", style: {
         display: 'block',
         fontWeight: 'bold',

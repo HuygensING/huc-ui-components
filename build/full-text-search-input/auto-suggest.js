@@ -4,10 +4,12 @@ const React = require("react");
 const Suggestions = (props) => React.createElement("ul", { style: {
         boxSizing: 'border-box',
         listStyle: 'none',
-        margin: '0 0 0 0',
-        padding: '0 1em 1em 1em',
+        margin: 0,
+        padding: 0,
         position: 'absolute',
         width: 'calc(100% - 100px)',
+        border: '1px solid #eee',
+        borderBottom: '0px',
         zIndex: 1,
     } }, props.children);
 class Suggestion extends React.Component {
@@ -19,8 +21,8 @@ class Suggestion extends React.Component {
     }
     render() {
         return (React.createElement("li", { onClick: (ev) => this.props.activateSuggestion(this.props.children), onMouseEnter: () => this.setState({ hover: true }), onMouseLeave: () => this.setState({ hover: false }), style: {
-                background: this.props.active || this.state.hover ? 'lightblue' : '#eee',
-                borderBottom: '2px solid #fff',
+                background: this.props.active || this.state.hover ? '#eee' : '#fff',
+                borderBottom: '1px solid #eee',
                 padding: '.3em',
             } }, this.props.children));
     }

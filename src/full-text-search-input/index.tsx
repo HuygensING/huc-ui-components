@@ -6,9 +6,7 @@ const Section = (props) =>
 	<section
 		style={{
 			...fontStyle,
-			...{
-				position: 'relative',
-			}
+			position: 'relative',
 		}}
 	>
 		{props.children}

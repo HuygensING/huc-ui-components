@@ -5,8 +5,8 @@ const Suggestions: React.SFC = (props) =>
 		style={{
 			boxSizing: 'border-box',
 			listStyle: 'none',
-			margin: '0 0 0 0',
-			padding: '0 0 0 0',
+			margin: 0,
+			padding: 0,
 			position: 'absolute',
 			width: 'calc(100% - 100px)',
             border: '1px solid #eee',

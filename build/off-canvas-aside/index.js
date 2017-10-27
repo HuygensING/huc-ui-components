@@ -1,25 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = require("react");
-const AsideComp = (props) => React.createElement("aside", { role: "complementary", style: {
-        bottom: 0,
-        boxSizing: 'border-box',
-        display: 'grid',
-        gridTemplateColumns: '40px auto',
-        gridTemplateRows: '100%',
-        left: props.activeAside === Aside.None ?
+const default_styles_1 = require("../default-styles");
+const AsideComp = (props) => React.createElement("aside", { role: "complementary", style: Object.assign({}, default_styles_1.fontStyle, { bottom: 0, boxSizing: 'border-box', display: 'grid', gridTemplateColumns: '40px auto', gridTemplateRows: '100%', left: props.activeAside === Aside.None ?
             'calc(100% - 40px)' :
             props.fullScreen ?
                 '-40px' :
-                '50%',
-        overflow: 'hidden',
-        position: 'absolute',
-        right: 0,
-        top: '65px',
-        transition: 'left 300ms ease-in-out',
-        whiteSpace: 'normal',
-        width: props.fullScreen ? 'calc(100% + 40px)' : '50%',
-    } }, props.children);
+                '50%', overflow: 'hidden', position: 'absolute', right: 0, top: '65px', transition: 'left 300ms ease-in-out', whiteSpace: 'normal', width: props.fullScreen ? 'calc(100% + 40px)' : '50%' }) }, props.children);
 const PanelContainer = (props) => React.createElement("section", { role: "tabpanel", style: {
         backgroundColor: '#EEE',
         boxSizing: 'border-box',

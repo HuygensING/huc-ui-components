@@ -17,16 +17,14 @@ const Header = (props) =>
 	<header
 		style={{
 			...fontStyle,
-			...{
-				alignItems: 'center',
-				backgroundColor: '#323232',
-				color: '#FFF',
-				display: 'grid',
-				gridTemplateColumns: '1fr 2fr 1fr',
-				height: '60px',
-				paddingTop: '5px',
-				width: '100%',
-			}
+			alignItems: 'center',
+			backgroundColor: '#323232',
+			color: '#FFF',
+			display: 'grid',
+			gridTemplateColumns: '1fr 2fr 1fr',
+			height: '60px',
+			paddingTop: '5px',
+			width: '100%',
 		}}
 	>
 		{props.children}
