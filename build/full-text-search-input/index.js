@@ -47,7 +47,11 @@ class FullTextSearchInput extends React.Component {
                 suggestions: [],
             });
             this.props.onChange(suggestion);
-            this.props.search(suggestion);
+            this.search(suggestion);
+        };
+        this.search = (query, ev) => {
+            this.setState({ suggestions: [] });
+            this.props.search(query, ev);
         };
         this.setActiveSuggestion = (keyCode) => {
             let activeSuggestion = this.state.activeSuggestion;
@@ -102,14 +106,14 @@ class FullTextSearchInput extends React.Component {
                         }
                         else {
                             this.props.onChange(this.state.query);
-                            this.props.search(this.state.query, ev);
+                            this.search(this.state.query, ev);
                         }
                     }
                     else if (this.props.onKeyDown != null) {
                         this.props.onKeyDown(ev);
                     }
                 }, value: this.state.query }),
-            React.createElement(Button, { onClick: (ev) => this.props.search(this.state.query, ev) }, "Search"),
+            React.createElement(Button, { onClick: (ev) => this.search(this.state.query, ev) }, "Search"),
             this.props.autoSuggest != null &&
                 React.createElement(auto_suggest_1.default, { activateSuggestion: this.activateSuggestion, activeSuggestion: this.state.activeSuggestion, suggestions: this.state.suggestions })));
     }

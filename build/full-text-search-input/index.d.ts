@@ -26,6 +26,7 @@ declare class FullTextSearchInput extends React.Component<IProps, IState> {
     componentWillReceiveProps(nextProps: any): void;
     render(): JSX.Element;
     private activateSuggestion;
+    private search;
     private setActiveSuggestion;
 }
 export default FullTextSearchInput;

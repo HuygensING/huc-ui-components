@@ -119,7 +119,7 @@ class FullTextSearchInput extends React.Component<IProps, IState> {
 								this.activateSuggestion(activeSuggestion)
 							} else {
 								this.props.onChange(this.state.query)
-								this.props.search(this.state.query, ev)
+								this.search(this.state.query, ev)
 							}
 						} else if (this.props.onKeyDown != null) {
 							this.props.onKeyDown(ev)
@@ -127,7 +127,7 @@ class FullTextSearchInput extends React.Component<IProps, IState> {
 					}}
 					value={this.state.query}
 				/>
-				<Button onClick={(ev) => this.props.search(this.state.query, ev)}>
+				<Button onClick={(ev) => this.search(this.state.query, ev)}>
 					Search
 				</Button>
 				{
@@ -149,8 +149,12 @@ class FullTextSearchInput extends React.Component<IProps, IState> {
 		})
 
 		this.props.onChange(suggestion)
-		this.props.search(suggestion)
+		this.search(suggestion)
+	}
 
+	private search = (query: string, ev?: any) => {
+		this.setState({ suggestions: [] })
+		this.props.search(query, ev)
 	}
 
 	private setActiveSuggestion = (keyCode: number) => {
