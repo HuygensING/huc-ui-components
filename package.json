@@ -4,6 +4,7 @@
   "description": "",
   "main": "build/index.js",
   "scripts": {
+    "build": "tsc",
     "build-storybook": "build-storybook -c .storybook -o docs",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "watch": "tsc -w"
