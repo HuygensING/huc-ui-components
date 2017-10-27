@@ -14,7 +14,7 @@ npm run build-storybook
 if [ $? -ne 0 ]; then exit 1; fi
 
 git add .
-git commit -m "Build v$next_version"
+git commit -m "New build"
 
 current_version=$(node -pe 'require("./package.json").version')
 
