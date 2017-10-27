@@ -6,9 +6,11 @@ const Suggestions: React.SFC = (props) =>
 			boxSizing: 'border-box',
 			listStyle: 'none',
 			margin: '0 0 0 0',
-			padding: '0 1em 1em 1em',
+			padding: '0 0 0 0',
 			position: 'absolute',
 			width: 'calc(100% - 100px)',
+            border: '1px solid #eee',
+            borderBottom: '0px',
 			zIndex: 1,
 		}}
 	>
@@ -36,8 +38,8 @@ class Suggestion extends React.Component<ISuggestionProps, ISuggestionState> {
 				onMouseEnter={() => this.setState({ hover: true })}
 				onMouseLeave={() => this.setState({ hover: false })}
 				style={{
-					background: this.props.active || this.state.hover ? 'lightblue' : '#eee',
-					borderBottom: '2px solid #fff',
+					background: this.props.active || this.state.hover ? '#eee' : '#fff',
+					borderBottom: '1px solid #eee',
 					padding: '.3em',
 				}}
 			>

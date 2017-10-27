@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { fontStyle } from '../default-styles';
 
 const AsideComp = (props) =>
 	<aside
 		role="complementary"
 		style={{
+			...fontStyle,
 			bottom: 0,
 			boxSizing: 'border-box',
 			display: 'grid',
