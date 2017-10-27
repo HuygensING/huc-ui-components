@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { fontStyle } from '../default-styles';
 
+const tabLabelWidth = '40px'
+
 const AsideComp = (props) =>
 	<aside
 		role="complementary"
@@ -9,13 +11,13 @@ const AsideComp = (props) =>
 			bottom: 0,
 			boxSizing: 'border-box',
 			display: 'grid',
-			gridTemplateColumns: '40px auto',
+			gridTemplateColumns: `${tabLabelWidth} auto`,
 			gridTemplateRows: '100%',
 			height: '100%',
 			left: props.activeAside === Aside.None ?
-				'calc(100% - 40px)' :
+				`calc(100% - ${tabLabelWidth})` :
 				props.fullScreen ?
-					'-40px' :
+					`-${tabLabelWidth}` :
 					'50%',
 			overflow: 'hidden',
 			position: 'fixed',
@@ -23,7 +25,7 @@ const AsideComp = (props) =>
 			top: 0,
 			transition: 'left 300ms ease-in-out',
 			whiteSpace: 'normal',
-			width: props.fullScreen ? 'calc(100% + 40px)' : '50%',
+			width: props.fullScreen ? `calc(100% + ${tabLabelWidth})` : '50%',
 		}}
 	>
 		{props.children}
@@ -78,8 +80,9 @@ const Tab = (props) =>
 			borderTopLeftRadius: '3px',
 			borderBottomLeftRadius: '3px',
 			cursor: 'pointer',
-			marginBottom: '1em',
-			padding: '1em',
+			marginBottom: '.5em',
+			padding: '.5em .5em .2em .5em',
+			width: tabLabelWidth,
 		}}
 	>
 		{props.children}
@@ -116,7 +119,7 @@ class HucOffCanvasAside extends React.Component<IProps, IState> {
 	}
 
 	public componentWillUpdate(nextProps, nextState) {
-		if (this.state.activeAside !== nextState.activeAside) {
+		if (this.props.onChangeActiveAside != null && this.state.activeAside !== nextState.activeAside) {
 			this.props.onChangeActiveAside(nextState.activeAside)
 		}
 	}
@@ -169,13 +172,25 @@ class HucOffCanvasAside extends React.Component<IProps, IState> {
 				<Tab
 					onClick={() => this.setState({ activeAside: Aside.Annotations })}
 				>
-					A	
+					<img
+						alt="Annotation tab icon"
+						src="http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-annotations.svg"
+						style={{
+							width: '1em',
+						}}
+					/>
 				</Tab>,
 			[Aside.Visualisations]:
 				<Tab
 					onClick={() => this.setState({ activeAside: Aside.Visualisations })}
 				>
-					V
+					<img
+						alt="Visualisation tab icon"
+						src="http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-visualisations.svg"
+						style={{
+							width: '1em',
+						}}
+					/>
 				</Tab>
 		}[name]
 	}

@@ -2,11 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = require("react");
 const default_styles_1 = require("../default-styles");
-const AsideComp = (props) => React.createElement("aside", { role: "complementary", style: Object.assign({}, default_styles_1.fontStyle, { bottom: 0, boxSizing: 'border-box', display: 'grid', gridTemplateColumns: '40px auto', gridTemplateRows: '100%', height: '100%', left: props.activeAside === Aside.None ?
-            'calc(100% - 40px)' :
+const tabLabelWidth = '40px';
+const AsideComp = (props) => React.createElement("aside", { role: "complementary", style: Object.assign({}, default_styles_1.fontStyle, { bottom: 0, boxSizing: 'border-box', display: 'grid', gridTemplateColumns: `${tabLabelWidth} auto`, gridTemplateRows: '100%', height: '100%', left: props.activeAside === Aside.None ?
+            `calc(100% - ${tabLabelWidth})` :
             props.fullScreen ?
-                '-40px' :
-                '50%', overflow: 'hidden', position: 'fixed', right: 0, top: 0, transition: 'left 300ms ease-in-out', whiteSpace: 'normal', width: props.fullScreen ? 'calc(100% + 40px)' : '50%' }) }, props.children);
+                `-${tabLabelWidth}` :
+                '50%', overflow: 'hidden', position: 'fixed', right: 0, top: 0, transition: 'left 300ms ease-in-out', whiteSpace: 'normal', width: props.fullScreen ? `calc(100% + ${tabLabelWidth})` : '50%' }) }, props.children);
 const PanelContainer = (props) => React.createElement("section", { role: "tabpanel", style: {
         backgroundColor: '#EEE',
         boxSizing: 'border-box',
@@ -31,8 +32,9 @@ const Tab = (props) => React.createElement("li", { onClick: props.onClick, role:
         borderTopLeftRadius: '3px',
         borderBottomLeftRadius: '3px',
         cursor: 'pointer',
-        marginBottom: '1em',
-        padding: '1em',
+        marginBottom: '.5em',
+        padding: '.5em .5em .2em .5em',
+        width: tabLabelWidth,
     } }, props.children);
 var Aside;
 (function (Aside) {
@@ -61,7 +63,7 @@ class HucOffCanvasAside extends React.Component {
         });
     }
     componentWillUpdate(nextProps, nextState) {
-        if (this.state.activeAside !== nextState.activeAside) {
+        if (this.props.onChangeActiveAside != null && this.state.activeAside !== nextState.activeAside) {
             this.props.onChangeActiveAside(nextState.activeAside);
         }
     }
@@ -78,8 +80,14 @@ class HucOffCanvasAside extends React.Component {
     }
     tabs(name) {
         return {
-            [Aside.Annotations]: React.createElement(Tab, { onClick: () => this.setState({ activeAside: Aside.Annotations }) }, "A"),
-            [Aside.Visualisations]: React.createElement(Tab, { onClick: () => this.setState({ activeAside: Aside.Visualisations }) }, "V")
+            [Aside.Annotations]: React.createElement(Tab, { onClick: () => this.setState({ activeAside: Aside.Annotations }) },
+                React.createElement("img", { alt: "Annotation tab icon", src: "http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-annotations.svg", style: {
+                        width: '1em',
+                    } })),
+            [Aside.Visualisations]: React.createElement(Tab, { onClick: () => this.setState({ activeAside: Aside.Visualisations }) },
+                React.createElement("img", { alt: "Visualisation tab icon", src: "http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-visualisations.svg", style: {
+                        width: '1em',
+                    } }))
         }[name];
     }
 }
