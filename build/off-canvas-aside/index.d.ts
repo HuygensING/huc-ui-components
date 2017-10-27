@@ -2,6 +2,7 @@
 import * as React from 'react';
 export interface IProps {
     fullScreen: boolean;
+    onChangeActiveAside: (a: Aside) => void;
     open: boolean;
 }
 export declare enum Aside {
@@ -23,6 +24,7 @@ declare class HucOffCanvasAside extends React.Component<IProps, IState> {
         fullScreen: boolean;
     };
     componentWillReceiveProps(nextProps: any): void;
+    componentWillUpdate(nextProps: any, nextState: any): void;
     render(): JSX.Element;
     private handleClose;
     private tabs(name);

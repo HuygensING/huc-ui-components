@@ -24,7 +24,9 @@ const Header = (props) =>
 			gridTemplateColumns: '1fr 2fr 1fr',
 			height: '60px',
 			paddingTop: '5px',
+			position: 'relative',
 			width: '100%',
+			zIndex: 1,
 		}}
 	>
 		{props.children}

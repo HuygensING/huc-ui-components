@@ -2,11 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = require("react");
 const default_styles_1 = require("../default-styles");
-const AsideComp = (props) => React.createElement("aside", { role: "complementary", style: Object.assign({}, default_styles_1.fontStyle, { bottom: 0, boxSizing: 'border-box', display: 'grid', gridTemplateColumns: '40px auto', gridTemplateRows: '100%', left: props.activeAside === Aside.None ?
+const AsideComp = (props) => React.createElement("aside", { role: "complementary", style: Object.assign({}, default_styles_1.fontStyle, { bottom: 0, boxSizing: 'border-box', display: 'grid', gridTemplateColumns: '40px auto', gridTemplateRows: '100%', height: '100%', left: props.activeAside === Aside.None ?
             'calc(100% - 40px)' :
             props.fullScreen ?
                 '-40px' :
-                '50%', overflow: 'hidden', position: 'absolute', right: 0, top: '65px', transition: 'left 300ms ease-in-out', whiteSpace: 'normal', width: props.fullScreen ? 'calc(100% + 40px)' : '50%' }) }, props.children);
+                '50%', overflow: 'hidden', position: 'fixed', right: 0, top: 0, transition: 'left 300ms ease-in-out', whiteSpace: 'normal', width: props.fullScreen ? 'calc(100% + 40px)' : '50%' }) }, props.children);
 const PanelContainer = (props) => React.createElement("section", { role: "tabpanel", style: {
         backgroundColor: '#EEE',
         boxSizing: 'border-box',
@@ -19,7 +19,8 @@ const CloseButton = (props) => React.createElement("div", { onClick: props.onCli
         fontSize: '1.5em',
         fontWeight: 'bold',
         marginBottom: '1em',
-        textAlign: 'right',
+        position: 'absolute',
+        right: '1em',
     } }, "\u2715");
 const Tabs = (props) => React.createElement("ul", { role: "tablist", style: {
         alignSelf: 'center',
@@ -59,12 +60,21 @@ class HucOffCanvasAside extends React.Component {
             fullScreen: nextProps.fullScreen,
         });
     }
+    componentWillUpdate(nextProps, nextState) {
+        if (this.state.activeAside !== nextState.activeAside) {
+            this.props.onChangeActiveAside(nextState.activeAside);
+        }
+    }
     render() {
         return (React.createElement(AsideComp, { activeAside: this.state.activeAside, fullScreen: this.state.fullScreen },
             React.createElement(Tabs, null, React.Children.map(this.props.children, (c) => this.tabs(c.props.type))),
-            React.createElement(PanelContainer, null,
-                React.createElement(CloseButton, { onClick: this.handleClose }),
-                React.Children.toArray(this.props.children).find((c) => c.props.type == this.state.activeAside))));
+            React.createElement("div", { style: {
+                    backgroundColor: '#eee',
+                    paddingTop: '65px',
+                } },
+                React.createElement(PanelContainer, null,
+                    React.createElement(CloseButton, { onClick: this.handleClose }),
+                    React.Children.toArray(this.props.children).find((c) => c.props.type == this.state.activeAside)))));
     }
     tabs(name) {
         return {

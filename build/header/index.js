@@ -10,7 +10,7 @@ const ColorBar = () => React.createElement("div", { style: {
         right: 0,
         top: 0,
     } });
-const Header = (props) => React.createElement("header", { style: Object.assign({}, default_styles_1.fontStyle, { alignItems: 'center', backgroundColor: '#323232', color: '#FFF', display: 'grid', gridTemplateColumns: '1fr 2fr 1fr', height: '60px', paddingTop: '5px', width: '100%' }) }, props.children);
+const Header = (props) => React.createElement("header", { style: Object.assign({}, default_styles_1.fontStyle, { alignItems: 'center', backgroundColor: '#323232', color: '#FFF', display: 'grid', gridTemplateColumns: '1fr 2fr 1fr', height: '60px', paddingTop: '5px', position: 'relative', width: '100%', zIndex: 1 }) }, props.children);
 const Menu = (props) => React.createElement("ul", { role: "menubar" }, props.children);
 const MenuItem = (props) => React.createElement("li", { onClick: (ev) => props.onClickMenuItem(props.children, ev), role: "menuitem", style: {
         cursor: 'pointer',

@@ -11,15 +11,16 @@ const AsideComp = (props) =>
 			display: 'grid',
 			gridTemplateColumns: '40px auto',
 			gridTemplateRows: '100%',
+			height: '100%',
 			left: props.activeAside === Aside.None ?
 				'calc(100% - 40px)' :
 				props.fullScreen ?
 					'-40px' :
 					'50%',
 			overflow: 'hidden',
-			position: 'absolute',
+			position: 'fixed',
 			right: 0,
-			top: '65px',
+			top: 0,
 			transition: 'left 300ms ease-in-out',
 			whiteSpace: 'normal',
 			width: props.fullScreen ? 'calc(100% + 40px)' : '50%',
@@ -50,7 +51,8 @@ const CloseButton = (props) =>
 			fontSize: '1.5em',
 			fontWeight: 'bold',
 			marginBottom: '1em',
-			textAlign: 'right',
+			position: 'absolute',
+			right: '1em',
 		}}
 	>
 		✕
@@ -86,6 +88,7 @@ const Tab = (props) =>
 
 export interface IProps {
 	fullScreen: boolean
+	onChangeActiveAside: (a: Aside) => void
 	open: boolean
 }
 
@@ -111,6 +114,12 @@ class HucOffCanvasAside extends React.Component<IProps, IState> {
 			fullScreen: nextProps.fullScreen,
 		})
 	}
+
+	public componentWillUpdate(nextProps, nextState) {
+		if (this.state.activeAside !== nextState.activeAside) {
+			this.props.onChangeActiveAside(nextState.activeAside)
+		}
+	}
 	
 	public render() {
 		return (
@@ -123,14 +132,19 @@ class HucOffCanvasAside extends React.Component<IProps, IState> {
 						React.Children.map(this.props.children, (c: JSX.Element) => this.tabs(c.props.type))
 					}
 				</Tabs>
-				<PanelContainer>
-					<CloseButton
-						onClick={this.handleClose}
-					/>
-					{
-						React.Children.toArray(this.props.children).find((c: JSX.Element) => c.props.type == this.state.activeAside)
-					}
-				</PanelContainer>
+				<div style={{
+					backgroundColor: '#eee',
+					paddingTop: '65px',
+				}}>
+					<PanelContainer>
+						<CloseButton
+							onClick={this.handleClose}
+						/>
+						{
+							React.Children.toArray(this.props.children).find((c: JSX.Element) => c.props.type == this.state.activeAside)
+						}
+					</PanelContainer>
+				</div>
 			</AsideComp>
 		);
 	}
