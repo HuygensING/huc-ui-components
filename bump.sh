@@ -16,12 +16,7 @@ if [ $? -ne 0 ]; then exit 1; fi
 git add .
 git commit -m "New build"
 
-current_version=$(node -pe 'require("./package.json").version')
-
 npm version $1 -m "v%s tagged"
-
-if [ $? -ne 0 ]; then exit 1; fi
-
-next_version=$(node -pe 'require("./package.json").version')
+npm publish
 
 git push && git push --tags
