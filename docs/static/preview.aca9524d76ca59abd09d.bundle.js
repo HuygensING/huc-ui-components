@@ -40485,7 +40485,7 @@ const PanelContainer = (props) => React.createElement("section", { role: "tabpan
         boxSizing: 'border-box',
         height: '100%',
         overflow: 'auto',
-        padding: '1em',
+        padding: '1.5em',
     } }, props.children);
 const CloseButton = (props) => React.createElement("div", { onClick: props.onClick, style: {
         cursor: 'pointer',
@@ -42653,4 +42653,4 @@ module.exports = __webpack_require__(541);
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=preview.9556668bfcb39051f3c9.bundle.js.map
+//# sourceMappingURL=preview.aca9524d76ca59abd09d.bundle.js.map
