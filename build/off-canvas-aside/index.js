@@ -13,7 +13,7 @@ const PanelContainer = (props) => React.createElement("section", { role: "tabpan
         boxSizing: 'border-box',
         height: '100%',
         overflow: 'auto',
-        padding: '1em',
+        padding: '1.5em',
     } }, props.children);
 const CloseButton = (props) => React.createElement("div", { onClick: props.onClick, style: {
         cursor: 'pointer',

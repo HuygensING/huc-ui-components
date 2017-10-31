@@ -39,7 +39,7 @@ const PanelContainer = (props) =>
 			boxSizing: 'border-box',
 			height: '100%',
 			overflow: 'auto',
-			padding: '1em',
+			padding: '1.5em',
 		}}
 	>
 		{props.children}
