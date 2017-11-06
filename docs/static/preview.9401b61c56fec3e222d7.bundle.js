@@ -40553,11 +40553,11 @@ class HucOffCanvasAside extends React.Component {
     tabs(name) {
         return {
             [Aside.Annotations]: React.createElement(Tab, { onClick: () => this.setState({ activeAside: Aside.Annotations }) },
-                React.createElement("img", { alt: "Annotation tab icon", src: "http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-annotations.svg", style: {
+                React.createElement("img", { alt: "Annotations tab icon", src: "http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-annotations.svg", style: {
                         width: '1em',
                     } })),
             [Aside.Visualisations]: React.createElement(Tab, { onClick: () => this.setState({ activeAside: Aside.Visualisations }) },
-                React.createElement("img", { alt: "Visualisation tab icon", src: "http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-visualisations.svg", style: {
+                React.createElement("img", { alt: "Visualisations tab icon", src: "http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-visualisations.svg", style: {
                         width: '1em',
                     } }))
         }[name];
@@ -40578,7 +40578,12 @@ exports.default = HucOffCanvasAside;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(0);
-const Panel = (props) => React.createElement("div", null, props.children);
+const Panel = (props) => React.createElement("div", null,
+    props.title &&
+        React.createElement("h2", { style: {
+                marginBottom: '1em',
+            } }, props.title),
+    props.children);
 exports.default = Panel;
 
 
@@ -42653,4 +42658,4 @@ module.exports = __webpack_require__(541);
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=preview.aca9524d76ca59abd09d.bundle.js.map
+//# sourceMappingURL=preview.9401b61c56fec3e222d7.bundle.js.map
