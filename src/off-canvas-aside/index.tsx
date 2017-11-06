@@ -173,7 +173,7 @@ class HucOffCanvasAside extends React.Component<IProps, IState> {
 					onClick={() => this.setState({ activeAside: Aside.Annotations })}
 				>
 					<img
-						alt="Annotation tab icon"
+						alt="Annotations tab icon"
 						src="http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-annotations.svg"
 						style={{
 							width: '1em',
@@ -185,7 +185,7 @@ class HucOffCanvasAside extends React.Component<IProps, IState> {
 					onClick={() => this.setState({ activeAside: Aside.Visualisations })}
 				>
 					<img
-						alt="Visualisation tab icon"
+						alt="Visualisations tab icon"
 						src="http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-visualisations.svg"
 						style={{
 							width: '1em',

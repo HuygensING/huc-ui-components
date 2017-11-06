@@ -81,11 +81,11 @@ class HucOffCanvasAside extends React.Component {
     tabs(name) {
         return {
             [Aside.Annotations]: React.createElement(Tab, { onClick: () => this.setState({ activeAside: Aside.Annotations }) },
-                React.createElement("img", { alt: "Annotation tab icon", src: "http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-annotations.svg", style: {
+                React.createElement("img", { alt: "Annotations tab icon", src: "http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-annotations.svg", style: {
                         width: '1em',
                     } })),
             [Aside.Visualisations]: React.createElement(Tab, { onClick: () => this.setState({ activeAside: Aside.Visualisations }) },
-                React.createElement("img", { alt: "Visualisation tab icon", src: "http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-visualisations.svg", style: {
+                React.createElement("img", { alt: "Visualisations tab icon", src: "http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-visualisations.svg", style: {
                         width: '1em',
                     } }))
         }[name];
