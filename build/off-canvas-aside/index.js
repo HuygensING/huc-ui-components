@@ -40,7 +40,8 @@ var Aside;
 (function (Aside) {
     Aside[Aside["None"] = 0] = "None";
     Aside[Aside["Annotations"] = 1] = "Annotations";
-    Aside[Aside["Visualisations"] = 2] = "Visualisations";
+    Aside[Aside["Metadata"] = 2] = "Metadata";
+    Aside[Aside["Visualisations"] = 3] = "Visualisations";
 })(Aside = exports.Aside || (exports.Aside = {}));
 class HucOffCanvasAside extends React.Component {
     constructor() {
@@ -86,6 +87,10 @@ class HucOffCanvasAside extends React.Component {
                     } })),
             [Aside.Visualisations]: React.createElement(Tab, { onClick: () => this.setState({ activeAside: Aside.Visualisations }) },
                 React.createElement("img", { alt: "Visualisations tab icon", src: "http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-visualisations.svg", style: {
+                        width: '1em',
+                    } })),
+            [Aside.Metadata]: React.createElement(Tab, { onClick: () => this.setState({ activeAside: Aside.Metadata }) },
+                React.createElement("img", { alt: "Metadata tab icon", src: "http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-metadata.svg", style: {
                         width: '1em',
                     } }))
         }[name];

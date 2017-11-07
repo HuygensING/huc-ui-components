@@ -8,7 +8,8 @@ export interface IProps {
 export declare enum Aside {
     None = 0,
     Annotations = 1,
-    Visualisations = 2,
+    Metadata = 2,
+    Visualisations = 3,
 }
 export interface IState {
     activeAside: Aside;

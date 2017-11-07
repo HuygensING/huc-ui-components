@@ -95,7 +95,7 @@ export interface IProps {
 	open: boolean
 }
 
-export enum Aside { None, Annotations, Visualisations }
+export enum Aside { None, Annotations, Metadata, Visualisations }
 export interface IState {
 	activeAside: Aside
 	fullScreen: boolean
@@ -187,6 +187,18 @@ class HucOffCanvasAside extends React.Component<IProps, IState> {
 					<img
 						alt="Visualisations tab icon"
 						src="http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-visualisations.svg"
+						style={{
+							width: '1em',
+						}}
+					/>
+				</Tab>,
+			[Aside.Metadata]:
+				<Tab
+					onClick={() => this.setState({ activeAside: Aside.Metadata })}
+				>
+					<img
+						alt="Metadata tab icon"
+						src="http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-metadata.svg"
 						style={{
 							width: '1em',
 						}}
