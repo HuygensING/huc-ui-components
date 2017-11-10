@@ -40520,20 +40520,12 @@ class HucOffCanvasAside extends React.Component {
         super(...arguments);
         this.state = {
             activeAside: this.props.open ? React.Children.toArray(this.props.children)[0].props.type : Aside.None,
-            fullScreen: this.props.fullScreen,
         };
         this.handleClose = () => {
-            const nextState = {
-                activeAside: Aside.None,
-            };
-            const done = () => setTimeout(() => this.setState({ fullScreen: false }), 300);
-            this.setState(nextState, done);
+            this.setState({ activeAside: Aside.None });
+            if (this.props.onClose)
+                this.props.onClose();
         };
-    }
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            fullScreen: nextProps.fullScreen,
-        });
     }
     componentWillUpdate(nextProps, nextState) {
         if (this.props.onChangeActiveAside != null && this.state.activeAside !== nextState.activeAside) {
@@ -40541,7 +40533,7 @@ class HucOffCanvasAside extends React.Component {
         }
     }
     render() {
-        return (React.createElement(AsideComp, { activeAside: this.state.activeAside, fullScreen: this.state.fullScreen },
+        return (React.createElement(AsideComp, { activeAside: this.state.activeAside, fullScreen: this.props.fullScreen },
             React.createElement(Tabs, null, React.Children.map(this.props.children, (c) => this.tabs(c.props.type))),
             React.createElement("div", { style: {
                     backgroundColor: '#eee',
@@ -40583,7 +40575,7 @@ exports.default = HucOffCanvasAside;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(0);
-const Panel = (props) => React.createElement("div", null,
+const Panel = (props) => React.createElement("div", { style: props.style },
     props.title &&
         React.createElement("h2", { style: {
                 marginBottom: '1em',
@@ -42663,4 +42655,4 @@ module.exports = __webpack_require__(541);
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=preview.adfc62663148cd59a9ee.bundle.js.map
+//# sourceMappingURL=preview.4dffb58d2629e4ca55e7.bundle.js.map
