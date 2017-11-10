@@ -92,13 +92,13 @@ const Tab = (props) =>
 export interface IProps {
 	fullScreen: boolean
 	onChangeActiveAside: (a: Aside) => void
+	onClose: () => void
 	open: boolean
 }
 
 export enum Aside { None, Annotations, Metadata, Visualisations }
 export interface IState {
 	activeAside: Aside
-	fullScreen: boolean
 }
 
 class HucOffCanvasAside extends React.Component<IProps, IState> {
@@ -109,13 +109,6 @@ class HucOffCanvasAside extends React.Component<IProps, IState> {
 
 	public state = {
 		activeAside: this.props.open ? (React.Children.toArray(this.props.children)[0] as JSX.Element).props.type : Aside.None,
-		fullScreen: this.props.fullScreen,
-	}
-
-	public componentWillReceiveProps(nextProps) {
-		this.setState({
-			fullScreen: nextProps.fullScreen,
-		})
 	}
 
 	public componentWillUpdate(nextProps, nextState) {
@@ -128,7 +121,7 @@ class HucOffCanvasAside extends React.Component<IProps, IState> {
 		return (
 			<AsideComp
 				activeAside={this.state.activeAside}
-				fullScreen={this.state.fullScreen}
+				fullScreen={this.props.fullScreen}
 			>
 				<Tabs>
 					{
@@ -153,17 +146,8 @@ class HucOffCanvasAside extends React.Component<IProps, IState> {
 	}
 
 	private handleClose = () => {
-		const nextState = {
-			activeAside: Aside.None,
-		}
-
-		const done = () =>
-			setTimeout(
-				() => this.setState({ fullScreen: false }),
-				300
-			)
-
-		this.setState(nextState, done)
+		this.setState({activeAside: Aside.None})
+		if (this.props.onClose) this.props.onClose()
 	}
 
 	private tabs(name) {

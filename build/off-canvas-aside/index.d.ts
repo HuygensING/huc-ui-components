@@ -3,6 +3,7 @@ import * as React from 'react';
 export interface IProps {
     fullScreen: boolean;
     onChangeActiveAside: (a: Aside) => void;
+    onClose: () => void;
     open: boolean;
 }
 export declare enum Aside {
@@ -13,7 +14,6 @@ export declare enum Aside {
 }
 export interface IState {
     activeAside: Aside;
-    fullScreen: boolean;
 }
 declare class HucOffCanvasAside extends React.Component<IProps, IState> {
     static defaultProps: {
@@ -22,9 +22,7 @@ declare class HucOffCanvasAside extends React.Component<IProps, IState> {
     };
     state: {
         activeAside: any;
-        fullScreen: boolean;
     };
-    componentWillReceiveProps(nextProps: any): void;
     componentWillUpdate(nextProps: any, nextState: any): void;
     render(): JSX.Element;
     private handleClose;

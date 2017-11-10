@@ -48,20 +48,12 @@ class HucOffCanvasAside extends React.Component {
         super(...arguments);
         this.state = {
             activeAside: this.props.open ? React.Children.toArray(this.props.children)[0].props.type : Aside.None,
-            fullScreen: this.props.fullScreen,
         };
         this.handleClose = () => {
-            const nextState = {
-                activeAside: Aside.None,
-            };
-            const done = () => setTimeout(() => this.setState({ fullScreen: false }), 300);
-            this.setState(nextState, done);
+            this.setState({ activeAside: Aside.None });
+            if (this.props.onClose)
+                this.props.onClose();
         };
-    }
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            fullScreen: nextProps.fullScreen,
-        });
     }
     componentWillUpdate(nextProps, nextState) {
         if (this.props.onChangeActiveAside != null && this.state.activeAside !== nextState.activeAside) {
@@ -69,7 +61,7 @@ class HucOffCanvasAside extends React.Component {
         }
     }
     render() {
-        return (React.createElement(AsideComp, { activeAside: this.state.activeAside, fullScreen: this.state.fullScreen },
+        return (React.createElement(AsideComp, { activeAside: this.state.activeAside, fullScreen: this.props.fullScreen },
             React.createElement(Tabs, null, React.Children.map(this.props.children, (c) => this.tabs(c.props.type))),
             React.createElement("div", { style: {
                     backgroundColor: '#eee',
