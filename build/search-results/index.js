@@ -29,6 +29,7 @@ const Result = (props) => React.createElement("li", { onClick: props.onClick, st
         backgroundColor: '#F6F6F6',
         marginBottom: '1em',
         padding: '1em',
+        cursor: 'pointer',
     } }, props.children);
 const HucSearchResults = (props) => React.createElement(Section, null,
     React.createElement(Header, null,

@@ -26,7 +26,7 @@ interface IResultCount {
 	resultCount: number;
 }
 const ResultCount: React.SFC<IResultCount> = (props) =>
-	<div> 
+	<div>
 		Found {props.resultCount} result{props.resultCount === 1 ? '' : 's'}
 	</div>
 
@@ -60,6 +60,7 @@ const Result: React.SFC<IResult> = (props) =>
 			backgroundColor: '#F6F6F6',
 			marginBottom: '1em',
 			padding: '1em',
+			cursor: 'pointer',
 		}}
 	>
 		{props.children}
