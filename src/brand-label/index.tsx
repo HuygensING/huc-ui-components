@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from 'react'
 
 const levisLabel = () =>
 	<div
@@ -25,6 +25,6 @@ const levisLabel = () =>
       src="http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/logo-timbuctoo-inv.svg"
       alt="Pergamon"
     />
-  </div>;
+  </div>
 
 export default levisLabel;
