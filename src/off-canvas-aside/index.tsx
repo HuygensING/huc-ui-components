@@ -66,6 +66,9 @@ const Tabs = (props) =>
 		style={{
 			alignSelf: 'center',
 			justifySelf: 'end',
+			margin: 0,
+			padding: 0,
+			listStyle: 'none',
 		}}
 	>
 		{props.children}

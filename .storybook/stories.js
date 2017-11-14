@@ -1,12 +1,18 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import {
+	Aside,
+	HucBrandLabel,
 	HucFullTextSearchInput,
 	HucHeader,
 	HucOffCanvasAside,
-	HucSearchResults
+	HucSearchResults,
+	Panel
 } from '../src';
 import ResultBody from './result-body';
+
+storiesOf('HucBrandLabel', module)
+	.add('empty', () => <HucBrandLabel />)
 
 storiesOf('HucHeader', module)
 	.add('empty', () => <HucHeader>This is added</HucHeader>)
@@ -14,7 +20,8 @@ storiesOf('HucHeader', module)
 	.add('with menu', () => <HucHeader title="ePistolarium" menuItems={["Home", "About"]} />);
 
 storiesOf('HucOffCanvasAside', module)
-	.add('empty', () => <HucOffCanvasAside>This is added</HucOffCanvasAside>)
+	.add('empty', () =>
+		<HucOffCanvasAside open><Panel type={Aside.Annotations}>This is added</Panel></HucOffCanvasAside>)
 
 storiesOf('HucFullTextSearchInput', module)
 	.add('default', () => <HucFullTextSearchInput />)

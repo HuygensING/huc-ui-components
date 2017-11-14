@@ -26,6 +26,9 @@ const CloseButton = (props) => React.createElement("div", { onClick: props.onCli
 const Tabs = (props) => React.createElement("ul", { role: "tablist", style: {
         alignSelf: 'center',
         justifySelf: 'end',
+        margin: 0,
+        padding: 0,
+        listStyle: 'none',
     } }, props.children);
 const Tab = (props) => React.createElement("li", { onClick: props.onClick, role: "tab", style: {
         backgroundColor: '#eee',

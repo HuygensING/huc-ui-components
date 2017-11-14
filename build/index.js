@@ -11,3 +11,5 @@ const search_results_1 = require("./search-results");
 exports.HucSearchResults = search_results_1.default;
 const panel_1 = require("./off-canvas-aside/panel");
 exports.Panel = panel_1.default;
+const brand_label_1 = require("./brand-label");
+exports.HucBrandLabel = brand_label_1.default;
