@@ -10,7 +10,7 @@ const levisLabel = () => React.createElement("div", { style: {
         backgroundColor: '#268f75',
         color: '#fff',
         padding: '0em 1em',
-        fontSize: '.6em',
+        fontSize: '15px',
         transform: 'rotate(90deg)',
     } },
     "Powered by",

@@ -8,10 +8,12 @@ const levisLabel = () =>
       bottom: '80px',
       marginRight: '-35px',
       borderRadius: '2px 0px 2px 0px',
+			fontFamily: "'Roboto', sans-serif",
+			fontWeight: 300,
       backgroundColor: '#268f75',
       color: '#fff',
-      padding: '0em 1em',
-      fontSize: '.6em',
+      padding: '.5em 1em',
+      fontSize: '11px',
       transform: 'rotate(90deg)',
 		}}
 	>
