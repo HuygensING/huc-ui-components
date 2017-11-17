@@ -51,13 +51,13 @@ class Tooltip extends React.Component {
     render() {
         const borderColor = this.props.bodyStyle.hasOwnProperty('borderColor') ?
             this.props.bodyStyle.borderColor :
-            'black';
+            '#aaa';
         const backgroundColor = this.props.bodyStyle.hasOwnProperty('backgroundColor') ?
             this.props.bodyStyle.backgroundColor :
             'white';
         return (React.createElement("div", { style: Object.assign({ position: 'absolute', zIndex: 999 }, this.props.style) },
             React.createElement("div", { style: Object.assign({ backgroundColor,
-                    borderColor, borderRadius: '6px', borderStyle: 'solid', borderWidth: '1px', color: 'black', height: '100%', padding: '20px' }, this.props.bodyStyle) }, this.props.children),
+                    borderColor, fontFamily: "'Roboto', sans-serif", fontWeight: 300, borderRadius: '2px', borderStyle: 'solid', borderWidth: '1px', color: '#666', height: '100%', padding: '1em', boxShadow: '3px 3px 9px #ccc' }, this.props.bodyStyle) }, this.props.children),
             React.createElement("svg", { fill: backgroundColor, height: "20px", style: this.getSvgStyle(), viewBox: "0 0 30 30", width: "20px" },
                 tipBorderByOrientation(borderColor)[this.props.orientation],
                 tipBackgroundByOrientation[this.props.orientation])));
