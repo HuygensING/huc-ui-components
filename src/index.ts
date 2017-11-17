@@ -4,6 +4,8 @@ import HucFullTextSearchInput from './full-text-search-input'
 import HucSearchResults from './search-results'
 import Panel from './off-canvas-aside/panel'
 import HucBrandLabel from './brand-label'
+import HucTooltip from './tooltip'
+
 export { IResultBody } from './search-results'
 
 export {
@@ -13,5 +15,6 @@ export {
     HucHeader,
     HucOffCanvasAside,
     HucSearchResults,
+    HucTooltip,
     Panel,
 };

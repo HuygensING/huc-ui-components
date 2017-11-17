@@ -13,3 +13,5 @@ const panel_1 = require("./off-canvas-aside/panel");
 exports.Panel = panel_1.default;
 const brand_label_1 = require("./brand-label");
 exports.HucBrandLabel = brand_label_1.default;
+const tooltip_1 = require("./tooltip");
+exports.HucTooltip = tooltip_1.default;
