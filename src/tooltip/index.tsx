@@ -37,7 +37,7 @@ class Tooltip extends React.Component<IProps, null> {
 	public render() {
 		const borderColor = this.props.bodyStyle.hasOwnProperty('borderColor') ?
 			this.props.bodyStyle.borderColor :
-			'black'
+			'#aaa'
 
 		const backgroundColor = this.props.bodyStyle.hasOwnProperty('backgroundColor') ?
 			this.props.bodyStyle.backgroundColor :
@@ -55,12 +55,15 @@ class Tooltip extends React.Component<IProps, null> {
 					style={{
 						backgroundColor,
 						borderColor,
-						borderRadius: '6px',
+						fontFamily: "'Roboto', sans-serif",
+						fontWeight: 300,
+						borderRadius: '2px',
 						borderStyle: 'solid',
 						borderWidth: '1px',
-						color: 'black',
+						color: '#666',
 						height: '100%',
-						padding: '20px',
+						padding: '1em',
+						boxShadow: '3px 3px 9px #ccc',
 						...this.props.bodyStyle,
 					}}
 				>
