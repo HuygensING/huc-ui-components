@@ -21,7 +21,7 @@ const AsideComp = (props) =>
 			position: 'fixed',
 			right: props.activeAside === Aside.None ? `${tabLabelWidth - props.width}px` : 0,
 			top: 0,
-			transition: 'left 300ms ease-in-out',
+			transition: 'right 300ms ease-in-out',
 			whiteSpace: 'normal',
 			width: props.fullScreen ? `calc(100% + ${tabLabelWidth}px)` : `${props.width}px`,
 		}}
