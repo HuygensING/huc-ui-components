@@ -38903,7 +38903,7 @@ var Aside;
     Aside[Aside["Metadata"] = 2] = "Metadata";
     Aside[Aside["Visualisations"] = 3] = "Visualisations";
 })(Aside = exports.Aside || (exports.Aside = {}));
-const AsideComp = (props) => React.createElement("aside", { role: "complementary", style: Object.assign({}, default_styles_1.fontStyle, { bottom: 0, boxSizing: 'border-box', display: 'grid', gridTemplateColumns: `${exports.tabLabelWidth}px auto`, gridTemplateRows: '100%', height: '100%', overflow: 'hidden', position: 'fixed', right: props.activeAside === Aside.None ? `${exports.tabLabelWidth - props.width}px` : 0, top: 0, transition: 'left 300ms ease-in-out', whiteSpace: 'normal', width: props.fullScreen ? `calc(100% + ${exports.tabLabelWidth}px)` : `${props.width}px` }) }, props.children);
+const AsideComp = (props) => React.createElement("aside", { role: "complementary", style: Object.assign({}, default_styles_1.fontStyle, { bottom: 0, boxSizing: 'border-box', display: 'grid', gridTemplateColumns: `${exports.tabLabelWidth}px auto`, gridTemplateRows: '100%', height: '100%', overflow: 'hidden', position: 'fixed', right: props.activeAside === Aside.None ? `${exports.tabLabelWidth - props.width}px` : 0, top: 0, transition: 'right 300ms ease-in-out', whiteSpace: 'normal', width: props.fullScreen ? `calc(100% + ${exports.tabLabelWidth}px)` : `${props.width}px` }) }, props.children);
 const CloseButton = (props) => React.createElement("div", { onClick: props.onClick, style: {
         cursor: 'pointer',
         fontSize: '1.5em',
@@ -42880,4 +42880,4 @@ module.exports = __webpack_require__(543);
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=preview.82c1505fe43f83a2f0fb.bundle.js.map
+//# sourceMappingURL=preview.e7e721209e0da43720cf.bundle.js.map
