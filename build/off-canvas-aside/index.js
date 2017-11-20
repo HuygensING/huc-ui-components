@@ -39,7 +39,6 @@ class HucOffCanvasAside extends React.Component {
         }
     }
     render() {
-        console.log(this.props, this.state);
         return (React.createElement(AsideComp, { activeAside: this.state.activeAside, fullScreen: this.props.fullScreen, width: this.props.width },
             React.createElement(tabs_1.Tabs, null, React.Children.map(this.props.children, (c) => this.tabs(c.props.type))),
             React.createElement("div", { style: {

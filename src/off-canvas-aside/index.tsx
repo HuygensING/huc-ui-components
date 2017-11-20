@@ -73,7 +73,6 @@ class HucOffCanvasAside extends React.Component<IProps, IState> {
 	}
 	
 	public render() {
-		console.log(this.props, this.state)
 		return (
 			<AsideComp
 				activeAside={this.state.activeAside}
