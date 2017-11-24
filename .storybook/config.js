@@ -1,7 +1,8 @@
 import { configure } from '@storybook/react';
 
 function loadStories() {
-	require('./stories.js');
+	require('./tooltip.js')
+	require('./stories.js')
 }
 
 configure(loadStories, module);

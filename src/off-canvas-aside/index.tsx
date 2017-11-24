@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { fontStyle } from '../default-styles';
 import { Tab, Tabs } from './tabs'
-import { Panel, PanelContainer } from './panel'
+import { PanelContainer } from './panel'
 
 export const tabLabelWidth: number = 40
 export enum Aside { None, Annotations, Metadata, Visualisations }

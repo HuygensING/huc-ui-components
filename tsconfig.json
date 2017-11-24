@@ -4,6 +4,7 @@
     "declaration": true,
     "jsx": "react",
     "module": "commonjs",
+    "noUnusedLocals": true,
     "outDir": "build",
     "removeComments": true,
     "target": "es6"

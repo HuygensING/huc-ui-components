@@ -58,10 +58,6 @@ const Button = (props) =>
 		{props.children}
 	</button>
 
-interface IOnClick {
-	onClick: (any) => void
-}
-
 export interface IState {
 	activeSuggestion: string | null
 	query: string

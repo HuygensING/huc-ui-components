@@ -27,12 +27,34 @@ export interface IProps {
 }
 
 class Tooltip extends React.Component<IProps, null> {
+	private svgEl: SVGElement
+	private el: HTMLElement
+
 	public static defaultProps: IProps = {
 		bodyStyle: {},
 		orientation: "bottom",
 		shift: .5,
 		style: {},
 	};
+
+	public componentDidMount() {
+		if (this.props.orientation === 'top' || this.props.orientation === 'bottom') {
+			const svgRect = this.svgEl.getBoundingClientRect()
+			const elRect = this.el.getBoundingClientRect()
+			if (svgRect.left < elRect.left) this.svgEl.style.left = '1px'
+			if (svgRect.left + svgRect.width > elRect.left + elRect.width) {
+				this.svgEl.style.left = (elRect.width - 21) + 'px'
+			}
+		}
+		else if (this.props.orientation === 'left' || this.props.orientation === 'right') {
+			const svgRect = this.svgEl.getBoundingClientRect()
+			const elRect = this.el.getBoundingClientRect()
+			if (svgRect.top < elRect.top) this.svgEl.style.top = '1px'
+			if (svgRect.top + svgRect.height > elRect.top + elRect.height) {
+				this.svgEl.style.top = (elRect.height - 21) + 'px'
+			}
+		}
+	}
 
 	public render() {
 		const borderColor = this.props.bodyStyle.hasOwnProperty('borderColor') ?
@@ -45,6 +67,7 @@ class Tooltip extends React.Component<IProps, null> {
 
 		return (
 			<div
+				ref={el => { this.el = el }}
 				style={{
 					position: 'absolute',
 					zIndex: 999,
@@ -72,7 +95,8 @@ class Tooltip extends React.Component<IProps, null> {
 				<svg
 					fill={backgroundColor}
 					height="20px"
-					style={this.getSvgStyle()}
+					ref={el => { this.svgEl = el }}
+					style={this.getTipStyle()}
 					viewBox="0 0 30 30"
 					width="20px"
 				>
@@ -83,14 +107,14 @@ class Tooltip extends React.Component<IProps, null> {
 		);
 	}
 
-	private getSvgStyle = () => {
+	private getTipStyle = () => {
 		let style;
 
-		let bottomOrTop: React.CSSProperties = {
+		const bottomOrTop: React.CSSProperties = {
 			left: `calc(${100 * this.props.shift}% - 10px)`,
 		};
 
-		let leftOrRight: React.CSSProperties = {
+		const leftOrRight: React.CSSProperties = {
 			top: `calc(${100 * this.props.shift}% - 10px)`,
 		};
 
