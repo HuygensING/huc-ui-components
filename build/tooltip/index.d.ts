@@ -7,8 +7,11 @@ export interface IProps {
     style?: React.CSSProperties;
 }
 declare class Tooltip extends React.Component<IProps, null> {
+    private svgEl;
+    private el;
     static defaultProps: IProps;
+    componentDidMount(): void;
     render(): JSX.Element;
-    private getSvgStyle;
+    private getTipStyle;
 }
 export default Tooltip;

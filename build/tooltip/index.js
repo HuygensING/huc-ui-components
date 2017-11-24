@@ -18,12 +18,12 @@ const tipBorderByOrientation = (strokeColor) => {
 class Tooltip extends React.Component {
     constructor() {
         super(...arguments);
-        this.getSvgStyle = () => {
+        this.getTipStyle = () => {
             let style;
-            let bottomOrTop = {
+            const bottomOrTop = {
                 left: `calc(${100 * this.props.shift}% - 10px)`,
             };
-            let leftOrRight = {
+            const leftOrRight = {
                 top: `calc(${100 * this.props.shift}% - 10px)`,
             };
             switch (this.props.orientation) {
@@ -48,6 +48,26 @@ class Tooltip extends React.Component {
             return style;
         };
     }
+    componentDidMount() {
+        if (this.props.orientation === 'top' || this.props.orientation === 'bottom') {
+            const svgRect = this.svgEl.getBoundingClientRect();
+            const elRect = this.el.getBoundingClientRect();
+            if (svgRect.left < elRect.left)
+                this.svgEl.style.left = '1px';
+            if (svgRect.left + svgRect.width > elRect.left + elRect.width) {
+                this.svgEl.style.left = (elRect.width - 21) + 'px';
+            }
+        }
+        else if (this.props.orientation === 'left' || this.props.orientation === 'right') {
+            const svgRect = this.svgEl.getBoundingClientRect();
+            const elRect = this.el.getBoundingClientRect();
+            if (svgRect.top < elRect.top)
+                this.svgEl.style.top = '1px';
+            if (svgRect.top + svgRect.height > elRect.top + elRect.height) {
+                this.svgEl.style.top = (elRect.height - 21) + 'px';
+            }
+        }
+    }
     render() {
         const borderColor = this.props.bodyStyle.hasOwnProperty('borderColor') ?
             this.props.bodyStyle.borderColor :
@@ -55,10 +75,10 @@ class Tooltip extends React.Component {
         const backgroundColor = this.props.bodyStyle.hasOwnProperty('backgroundColor') ?
             this.props.bodyStyle.backgroundColor :
             'white';
-        return (React.createElement("div", { style: Object.assign({ position: 'absolute', zIndex: 999 }, this.props.style) },
+        return (React.createElement("div", { ref: el => { this.el = el; }, style: Object.assign({ position: 'absolute', zIndex: 999 }, this.props.style) },
             React.createElement("div", { style: Object.assign({ backgroundColor,
                     borderColor, fontFamily: "'Roboto', sans-serif", fontWeight: 300, borderRadius: '2px', borderStyle: 'solid', borderWidth: '1px', color: '#666', height: '100%', padding: '1em', boxShadow: '3px 3px 9px #ccc' }, this.props.bodyStyle) }, this.props.children),
-            React.createElement("svg", { fill: backgroundColor, height: "20px", style: this.getSvgStyle(), viewBox: "0 0 30 30", width: "20px" },
+            React.createElement("svg", { fill: backgroundColor, height: "20px", ref: el => { this.svgEl = el; }, style: this.getTipStyle(), viewBox: "0 0 30 30", width: "20px" },
                 tipBorderByOrientation(borderColor)[this.props.orientation],
                 tipBackgroundByOrientation[this.props.orientation])));
     }
