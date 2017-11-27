@@ -40682,6 +40682,14 @@ const HucSearchResults = (props) => React.createElement(Section, null,
         React.createElement(OrderBy, null)),
     React.createElement(ResultList, null, props.searchResults.hits.map((result, i) => React.createElement(Result, { key: i, onClick: (ev) => props.onClickResult(result, ev) },
         React.createElement(props.resultBodyComponent, Object.assign({}, props, { result: result }))))));
+HucSearchResults.defaultProps = {
+    searchResults: {
+        hits: [],
+        id: null,
+        query: {},
+        total: 0,
+    }
+};
 exports.default = HucSearchResults;
 
 
@@ -42978,4 +42986,4 @@ module.exports = __webpack_require__(544);
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=preview.6a87194ef089bf47fe12.bundle.js.map
+//# sourceMappingURL=preview.1985f90e240d110ca6bc.bundle.js.map
