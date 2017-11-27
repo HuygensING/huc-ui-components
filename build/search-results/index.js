@@ -37,4 +37,12 @@ const HucSearchResults = (props) => React.createElement(Section, null,
         React.createElement(OrderBy, null)),
     React.createElement(ResultList, null, props.searchResults.hits.map((result, i) => React.createElement(Result, { key: i, onClick: (ev) => props.onClickResult(result, ev) },
         React.createElement(props.resultBodyComponent, Object.assign({}, props, { result: result }))))));
+HucSearchResults.defaultProps = {
+    searchResults: {
+        hits: [],
+        id: null,
+        query: {},
+        total: 0,
+    }
+};
 exports.default = HucSearchResults;

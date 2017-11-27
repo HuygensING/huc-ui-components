@@ -1,6 +1,13 @@
 import * as React from 'react';
 import { fontStyle } from '../default-styles';
 
+export type SearchResults = {
+	hits: any[],
+	id: string
+	query: Object,
+	total: number
+}
+
 const Section: React.SFC = (props) =>
 	<section
 		style={fontStyle}
@@ -72,10 +79,7 @@ export interface IResultBody {
 export interface IHucSearchResults {
 	onClickResult: (result: any, ev: React.MouseEvent<HTMLLIElement>) => void
 	resultBodyComponent: React.SFC<IResultBody>
-	searchResults: {
-		hits: any[],
-		total: number,
-	}
+	searchResults: SearchResults
 }
 const HucSearchResults: React.SFC<IHucSearchResults> = (props) =>
 	<Section>
@@ -96,5 +100,14 @@ const HucSearchResults: React.SFC<IHucSearchResults> = (props) =>
 			}
 		</ResultList>
 	</Section>
+
+HucSearchResults.defaultProps = {
+	searchResults: {
+		hits: [],
+		id: null,
+		query: {},
+		total: 0,
+	}
+}
 
 export default HucSearchResults;
