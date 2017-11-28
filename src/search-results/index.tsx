@@ -37,15 +37,6 @@ const ResultCount: React.SFC<IResultCount> = (props) =>
 		Found {props.resultCount} result{props.resultCount === 1 ? '' : 's'}
 	</div>
 
-const OrderBy: React.SFC = (props) =>
-	<div
-		style={{
-			justifySelf: 'end',
-		}}
-	>
-		Order by <em>date</em>
-	</div>
-
 const ResultList: React.SFC = (props) =>
 	<ul
 		style={{
@@ -85,7 +76,7 @@ const HucSearchResults: React.SFC<IHucSearchResults> = (props) =>
 	<Section>
 		<Header>
 			<ResultCount resultCount={props.searchResults.total} />
-			<OrderBy />
+			{/* <OrderBy /> */}
 		</Header>
 		<ResultList>
 			{

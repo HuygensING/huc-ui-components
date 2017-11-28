@@ -15,11 +15,6 @@ const ResultCount = (props) => React.createElement("div", null,
     props.resultCount,
     " result",
     props.resultCount === 1 ? '' : 's');
-const OrderBy = (props) => React.createElement("div", { style: {
-        justifySelf: 'end',
-    } },
-    "Order by ",
-    React.createElement("em", null, "date"));
 const ResultList = (props) => React.createElement("ul", { style: {
         listStyle: 'none',
         margin: 0,
@@ -33,8 +28,7 @@ const Result = (props) => React.createElement("li", { onClick: props.onClick, st
     } }, props.children);
 const HucSearchResults = (props) => React.createElement(Section, null,
     React.createElement(Header, null,
-        React.createElement(ResultCount, { resultCount: props.searchResults.total }),
-        React.createElement(OrderBy, null)),
+        React.createElement(ResultCount, { resultCount: props.searchResults.total })),
     React.createElement(ResultList, null, props.searchResults.hits.map((result, i) => React.createElement(Result, { key: i, onClick: (ev) => props.onClickResult(result, ev) },
         React.createElement(props.resultBodyComponent, Object.assign({}, props, { result: result }))))));
 HucSearchResults.defaultProps = {
