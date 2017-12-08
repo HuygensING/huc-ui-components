@@ -38967,15 +38967,15 @@ class HucOffCanvasAside extends React.Component {
     tabs(name) {
         return {
             [Aside.Annotations]: React.createElement(tabs_1.Tab, { onClick: () => this.setState({ activeAside: Aside.Annotations }) },
-                React.createElement("img", { alt: "Annotations tab icon", src: "http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-annotations.svg", style: {
+                React.createElement("img", { alt: "Annotations tab icon", src: "/static/graphics/ui/huc-tab-annotations.svg", style: {
                         width: '1em',
                     } })),
             [Aside.Visualisations]: React.createElement(tabs_1.Tab, { onClick: () => this.setState({ activeAside: Aside.Visualisations }) },
-                React.createElement("img", { alt: "Visualisations tab icon", src: "http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-visualisations.svg", style: {
+                React.createElement("img", { alt: "Visualisations tab icon", src: "/static/graphics/ui/huc-tab-visualisations.svg", style: {
                         width: '1em',
                     } })),
             [Aside.Metadata]: React.createElement(tabs_1.Tab, { onClick: () => this.setState({ activeAside: Aside.Metadata }) },
-                React.createElement("img", { alt: "Metadata tab icon", src: "http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-metadata.svg", style: {
+                React.createElement("img", { alt: "Metadata tab icon", src: "/static/graphics/ui/huc-tab-metadata.svg", style: {
                         width: '1em',
                     } }))
         }[name];
@@ -40587,7 +40587,7 @@ const MenuItem = (props) => React.createElement("li", { onClick: (ev) => props.o
         fontSize: '0.85em',
         marginLeft: '1em',
     } }, props.children);
-const Logo = (props) => React.createElement("img", { alt: "HuygensING logo", onClick: props.onClick, src: "http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/logo-huygens-ing-inv.svg", style: {
+const Logo = (props) => React.createElement("img", { alt: "HuygensING logo", onClick: props.onClick, src: "/static/graphics/ui/huygens-logo.png", style: {
         cursor: props.onClick == null ? 'default' : 'pointer',
         height: '2em',
         justifySelf: 'end',
@@ -42980,4 +42980,4 @@ module.exports = __webpack_require__(544);
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=preview.0825df2df89f06ccc457.bundle.js.map
+//# sourceMappingURL=preview.b6ba9c31e4612b85b648.bundle.js.map
