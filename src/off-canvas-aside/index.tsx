@@ -114,7 +114,7 @@ class HucOffCanvasAside extends React.Component<IProps, IState> {
 				>
 					<img
 						alt="Annotations tab icon"
-						src="http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-annotations.svg"
+						src="/static/graphics/ui/huc-tab-annotations.svg"
 						style={{
 							width: '1em',
 						}}
@@ -126,7 +126,7 @@ class HucOffCanvasAside extends React.Component<IProps, IState> {
 				>
 					<img
 						alt="Visualisations tab icon"
-						src="http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-visualisations.svg"
+						src="/static/graphics/ui/huc-tab-visualisations.svg"
 						style={{
 							width: '1em',
 						}}
@@ -138,7 +138,7 @@ class HucOffCanvasAside extends React.Component<IProps, IState> {
 				>
 					<img
 						alt="Metadata tab icon"
-						src="http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-metadata.svg"
+						src="/static/graphics/ui/huc-tab-metadata.svg"
 						style={{
 							width: '1em',
 						}}

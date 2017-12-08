@@ -55,7 +55,7 @@ const Logo = (props) =>
 	<img
 		alt="HuygensING logo"
 		onClick={props.onClick}
-		src="http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/logo-huygens-ing-inv.svg"
+		src="/static/graphics/ui/huygens-logo.png"
 		style={{
 			cursor: props.onClick == null ? 'default' : 'pointer',
 			height: '2em',

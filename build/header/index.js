@@ -18,7 +18,7 @@ const MenuItem = (props) => React.createElement("li", { onClick: (ev) => props.o
         fontSize: '0.85em',
         marginLeft: '1em',
     } }, props.children);
-const Logo = (props) => React.createElement("img", { alt: "HuygensING logo", onClick: props.onClick, src: "http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/logo-huygens-ing-inv.svg", style: {
+const Logo = (props) => React.createElement("img", { alt: "HuygensING logo", onClick: props.onClick, src: "/static/graphics/ui/huygens-logo.png", style: {
         cursor: props.onClick == null ? 'default' : 'pointer',
         height: '2em',
         justifySelf: 'end',

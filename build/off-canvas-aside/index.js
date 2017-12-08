@@ -52,15 +52,15 @@ class HucOffCanvasAside extends React.Component {
     tabs(name) {
         return {
             [Aside.Annotations]: React.createElement(tabs_1.Tab, { onClick: () => this.setState({ activeAside: Aside.Annotations }) },
-                React.createElement("img", { alt: "Annotations tab icon", src: "http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-annotations.svg", style: {
+                React.createElement("img", { alt: "Annotations tab icon", src: "/static/graphics/ui/huc-tab-annotations.svg", style: {
                         width: '1em',
                     } })),
             [Aside.Visualisations]: React.createElement(tabs_1.Tab, { onClick: () => this.setState({ activeAside: Aside.Visualisations }) },
-                React.createElement("img", { alt: "Visualisations tab icon", src: "http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-visualisations.svg", style: {
+                React.createElement("img", { alt: "Visualisations tab icon", src: "/static/graphics/ui/huc-tab-visualisations.svg", style: {
                         width: '1em',
                     } })),
             [Aside.Metadata]: React.createElement(tabs_1.Tab, { onClick: () => this.setState({ activeAside: Aside.Metadata }) },
-                React.createElement("img", { alt: "Metadata tab icon", src: "http://design.huygens.knaw.nl/wp-content/themes/huc-design-system/images/icons/huc-tab-metadata.svg", style: {
+                React.createElement("img", { alt: "Metadata tab icon", src: "/static/graphics/ui/huc-tab-metadata.svg", style: {
                         width: '1em',
                     } }))
         }[name];
