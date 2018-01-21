@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { fontStyle } from '../default-styles';
 
-export type SearchResults = {
-	hits: any[],
-	id: string
-	query: Object,
+export interface ISearchResults {
+	hits: any[]
+	id?: string
+	query?: Object
 	total: number
 }
 
@@ -70,7 +70,7 @@ export interface IResultBody {
 export interface IHucSearchResults {
 	onClickResult: (result: any, ev: React.MouseEvent<HTMLLIElement>) => void
 	resultBodyComponent: React.SFC<IResultBody>
-	searchResults: SearchResults
+	searchResults: ISearchResults
 }
 const HucSearchResults: React.SFC<IHucSearchResults> = (props) =>
 	<Section>

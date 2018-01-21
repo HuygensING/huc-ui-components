@@ -72,7 +72,7 @@ export interface IProps {
 	search: (query: string, ev?: MouseEvent) => void
 }
 class FullTextSearchInput extends React.Component<IProps, IState> {
-	static defaultProps = {
+	public static defaultProps = {
 		minimalQueryLength: 2,
 		query: '',
 	}
