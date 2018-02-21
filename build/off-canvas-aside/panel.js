@@ -7,6 +7,7 @@ exports.PanelContainer = (props) => React.createElement("section", { role: "tabp
         height: '100%',
         overflow: 'auto',
         padding: '1.5em',
+        position: 'relative',
     } }, props.children);
 exports.Panel = (props) => React.createElement("div", { style: props.style },
     props.title &&

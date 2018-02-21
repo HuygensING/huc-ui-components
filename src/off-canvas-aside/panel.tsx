@@ -10,6 +10,7 @@ export const PanelContainer = (props) =>
 			height: '100%',
 			overflow: 'auto',
 			padding: '1.5em',
+			position: 'relative',
 		}}
 	>
 		{props.children}
