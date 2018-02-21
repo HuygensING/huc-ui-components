@@ -39004,6 +39004,7 @@ exports.PanelContainer = (props) => React.createElement("section", { role: "tabp
         height: '100%',
         overflow: 'auto',
         padding: '1.5em',
+        position: 'relative',
     } }, props.children);
 exports.Panel = (props) => React.createElement("div", { style: props.style },
     props.title &&
@@ -42990,4 +42991,4 @@ module.exports = __webpack_require__(544);
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=preview.93b1390467b0436647b1.bundle.js.map
+//# sourceMappingURL=preview.037e91ccb863e25a67b7.bundle.js.map
