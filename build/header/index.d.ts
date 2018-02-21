@@ -1,10 +1,12 @@
 /// <reference types="react" />
 import * as React from 'react';
 export interface IProps {
+    logoLocation: string;
+    titleLocation: string;
     menuItems: string[];
-    onClickTitle: (MouseEvent) => void;
-    onClickLogo: (MouseEvent) => void;
-    onClickMenuItem: (string, MouseEvent) => void;
+    menuLocations: {
+        [item: string]: string;
+    };
     title: string;
 }
 declare const HucHeader: React.SFC<IProps>;

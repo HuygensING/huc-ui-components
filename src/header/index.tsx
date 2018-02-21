@@ -1,6 +1,18 @@
 import * as React from 'react';
 import { fontStyle } from '../default-styles';
 
+const A = (props) =>
+	<a
+		href={props.href}
+		style={{
+			color: 'inherit',
+			textDecoration: 'none',
+			...props.style
+		}}
+	>
+		{props.children}
+	</a>
+
 const ColorBar = () =>
 	<div
 		style={{
@@ -39,7 +51,6 @@ const Menu = (props) =>
 
 const MenuItem = (props) =>
 	<li
-		onClick={(ev) => props.onClickMenuItem(props.children, ev)}
 		role="menuitem"
 		style={{
 			cursor: 'pointer',
@@ -48,54 +59,56 @@ const MenuItem = (props) =>
 			marginLeft: '1em',
 		}}
 	>
-		{props.children}
+		<A href={props.href}>{props.children}</A>
 	</li>;
 
 const Logo = (props) =>
-	<img
-		alt="HuygensING logo"
-		onClick={props.onClick}
-		src="/static/graphics/ui/huygens-logo.png"
+	<A
+		href={props.href}
 		style={{
-			cursor: props.onClick == null ? 'default' : 'pointer',
 			height: '2em',
 			justifySelf: 'end',
 			marginRight: '2em',
 		}}
-	/>;
+	>
+		<img
+			alt="HuygensING logo"
+			src="/static/graphics/ui/huygens-logo.png"
+		/>
+	</A>
 
 const Title = (props) =>
 	<h1
-		onClick={props.onClick}
 		style={{
-			cursor: props.onClick == null ? 'default' : 'pointer',
 			fontWeight: 'normal',
 			fontSize: '1em',
 		}}
 	>
-		{props.children}
+		<A href={props.href}>{props.children}</A>
 	</h1>
 
 export interface IProps {
+	logoLocation: string
+	titleLocation: string
 	menuItems: string[];
-	onClickTitle: (MouseEvent) => void;
-	onClickLogo: (MouseEvent) => void;
-	onClickMenuItem: (string, MouseEvent) => void;
+	menuLocations: {
+		[item: string]: string
+	}
 	title: string;
 }
 
 const HucHeader: React.SFC<IProps> = (props) =>
 	<Header>
 		<ColorBar />
-		<Logo onClick={props.onClickLogo} />
-		<Title onClick={props.onClickTitle}>{props.title}</Title>
+		<Logo href={props.logoLocation} />
+		<Title href={props.titleLocation}>{props.title}</Title>
 		<nav role="navigation">
 			<Menu>
 				{
 					props.menuItems.map(mi =>
 						<MenuItem
+							href={props.menuLocations[mi] || '/'}
 							key={mi}
-							onClickMenuItem={props.onClickMenuItem}
 						>
 							{mi}
 						</MenuItem>
@@ -106,8 +119,10 @@ const HucHeader: React.SFC<IProps> = (props) =>
 	</Header>;
 
 HucHeader.defaultProps = {
+	logoLocation: '/',
 	menuItems: [],
-	onClickMenuItem: () => { console.error('Not implemented')},
+	menuLocations: {},
+	titleLocation: '/',
 }
 
 

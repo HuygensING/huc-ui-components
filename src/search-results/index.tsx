@@ -83,7 +83,9 @@ const HucSearchResults: React.SFC<IHucSearchResults> = (props) =>
 				props.searchResults.hits.map((result, i) =>
 					<Result
 						key={i}
-						onClick={(ev) => props.onClickResult(result, ev)}
+						onClick={(ev) => {
+							if (props.onClickResult != null) props.onClickResult(result, ev)
+						}}
 					>
 						<props.resultBodyComponent {...props} result={result} />
 					</Result>
