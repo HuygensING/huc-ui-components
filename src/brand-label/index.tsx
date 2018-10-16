@@ -1,8 +1,8 @@
 import * as React from 'react'
 
 export interface IProps {
-	href: string
-	imgBaseDir: string
+	href?: string
+	imgBaseDir?: string
 }
 const levisLabel: React.SFC<IProps> = (props) =>
 	<div

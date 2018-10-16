@@ -1,16 +1,15 @@
-/// <reference types="react" />
 import * as React from 'react';
 export declare const tabLabelWidth: number;
 export declare enum Aside {
     None = 0,
     Annotations = 1,
     Metadata = 2,
-    Visualisations = 3,
+    Visualisations = 3
 }
 export interface IProps {
     fullScreen: boolean;
-    onChangeActiveAside: (a: Aside) => void;
-    onClose: () => void;
+    onChangeActiveAside?: (a: Aside) => void;
+    onClose?: () => void;
     open: boolean;
     width: number;
 }
@@ -30,6 +29,6 @@ declare class HucOffCanvasAside extends React.Component<IProps, IState> {
     componentWillUpdate(nextProps: any, nextState: any): void;
     render(): JSX.Element;
     private handleClose;
-    private tabs(name);
+    private tabs;
 }
 export default HucOffCanvasAside;

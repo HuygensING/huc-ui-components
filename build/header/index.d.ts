@@ -1,8 +1,7 @@
-/// <reference types="react" />
 import * as React from 'react';
 export interface IProps {
-    logoLocation: string;
-    titleLocation: string;
+    logoLocation?: string;
+    titleLocation?: string;
     menuItems: string[];
     menuLocations: {
         [item: string]: string;

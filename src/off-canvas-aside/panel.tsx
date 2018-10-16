@@ -17,8 +17,8 @@ export const PanelContainer = (props) =>
 	</section>
 
 export interface IPanel {
-	style: React.CSSProperties
-	title: string
+	style?: React.CSSProperties
+	title?: string
 	type: Aside
 }
 export const Panel: React.SFC<IPanel> = (props) =>

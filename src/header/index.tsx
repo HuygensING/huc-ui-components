@@ -88,8 +88,8 @@ const Title = (props) =>
 	</h1>
 
 export interface IProps {
-	logoLocation: string
-	titleLocation: string
+	logoLocation?: string
+	titleLocation?: string
 	menuItems: string[];
 	menuLocations: {
 		[item: string]: string

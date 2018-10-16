@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import * as React from 'react';
 export interface ISearchResults {
     hits: any[];
@@ -10,7 +9,7 @@ export interface IResultBody {
     result: number;
 }
 export interface IHucSearchResults {
-    onClickResult: (result: any, ev: React.MouseEvent<HTMLLIElement>) => void;
+    onClickResult?: (result: any, ev: React.MouseEvent<HTMLLIElement>) => void;
     resultBodyComponent: React.SFC<IResultBody>;
     searchResults: ISearchResults;
 }

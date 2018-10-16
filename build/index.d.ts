@@ -5,4 +5,4 @@ import HucSearchResults, { ISearchResults } from './search-results';
 import { Panel } from './off-canvas-aside/panel';
 import HucBrandLabel from './brand-label';
 import HucTooltip from './tooltip';
-export { Aside, HucBrandLabel, HucFullTextSearchInput, HucHeader, HucOffCanvasAside, HucSearchResults, HucTooltip, Panel, ISearchResults };
+export { Aside, HucBrandLabel, HucFullTextSearchInput, HucHeader, HucOffCanvasAside, HucSearchResults, HucTooltip, Panel, ISearchResults, };

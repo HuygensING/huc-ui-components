@@ -46,8 +46,8 @@ const CloseButton = (props) =>
 
 export interface IProps {
 	fullScreen: boolean
-	onChangeActiveAside: (a: Aside) => void
-	onClose: () => void
+	onChangeActiveAside?: (a: Aside) => void
+	onClose?: () => void
 	open: boolean
 	width: number // In pixels
 }

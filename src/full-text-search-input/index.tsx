@@ -58,18 +58,18 @@ const Button = (props) =>
 		{props.children}
 	</button>
 
-export interface IState {
-	activeSuggestion: string | null
-	query: string
-	suggestions: string[]
-}
 export interface IProps {
-	autoSuggest: (query: string) => string[]
+	autoSuggest: (query: string) => Promise<string[]>
 	minimalQueryLength: number
 	onChange: (q: string) => void
 	onKeyDown: (ev: any) => void
 	query: string
 	search: (query: string, ev?: MouseEvent) => void
+}
+export interface IState {
+	activeSuggestion: string | null
+	query: string
+	suggestions: string[]
 }
 class FullTextSearchInput extends React.Component<IProps, IState> {
 	public static defaultProps = {
